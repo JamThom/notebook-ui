@@ -3,7 +3,7 @@ import getBaseUrl from './getBaseUrl';
 
 const makeQueryFn = (url: string) => async () => {
   try {
-    const response = await fetch(`${getBaseUrl()}${url}`);
+    const response = await fetch(`${getBaseUrl()}/api/${url}`);
     const data = await response.json();
     return data;
   } catch (error) {

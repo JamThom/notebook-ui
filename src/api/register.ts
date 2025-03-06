@@ -3,7 +3,7 @@ import getBaseUrl from "./utils/getBaseUrl";
 
 const register = async (formData: RegisterModel) => {
     try {
-        await fetch(`${getBaseUrl()}/register}`, {
+        await fetch(`${getBaseUrl()}/api/Account/register`, {
             method: 'POST',
             body: JSON.stringify(formData),
             headers: {

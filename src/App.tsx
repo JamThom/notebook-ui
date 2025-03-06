@@ -6,20 +6,24 @@ import BookPage from "./pages/BookPage/BookPage";
 import BooksPage from "./pages/BooksPage/BooksPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import HomePage from "./pages/HomePage/HomePage";
+import routes from "./config/routes";
+import ApiProvider from "./api/ApiProvider";
 
 const App = () => {
   return (
     <ChakraProvider theme={theme}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/books/:bookId" element={<BookPage />} />
-          <Route path="/books" element={<BooksPage />} />
-          <Route path="*" element={<div>404 Not Found</div>} />
-        </Routes>
-      </BrowserRouter>
+      <ApiProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path={routes.home} element={<HomePage />} />
+            <Route path={routes.login} element={<LoginPage />} />
+            <Route path={routes.register} element={<RegisterPage />} />
+            <Route path={routes.book} element={<BookPage />} />
+            <Route path={routes.books} element={<BooksPage />} />
+            <Route path="*" element={<div>404 Not Found</div>} />
+          </Routes>
+        </BrowserRouter>
+      </ApiProvider>
     </ChakraProvider>
   );
 };

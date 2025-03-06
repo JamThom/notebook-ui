@@ -3,6 +3,6 @@ const routes = {
     login: '/login',
     register: '/register',
     books: '/books',
-    book: '/books/:id',
+    book: '/books/:bookId',
 };
 export default routes;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Heading } from '@chakra-ui/react';
 import BookList from './components/BookList/BookList';
+import CreateNotebook from './components/CreateNotebook/CreateNotebook';
 
 const BooksPage: React.FC = () => {
     return (
@@ -8,6 +9,7 @@ const BooksPage: React.FC = () => {
             <Heading as="h1" size="lg" mb={4}>
                 Books
             </Heading>
+            <CreateNotebook />
             <BookList />
         </Box>
     );

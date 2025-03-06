@@ -9,14 +9,18 @@
  * ---------------------------------------------------------------
  */
 
+export interface BookRequest {
+  name: string;
+}
+
 export interface Book {
   /** @format uuid */
-  id?: string;
+  id: string;
   name: string;
   /** @uniqueItems true */
-  pages: Page[];
-  userId: string;
-  user: User;
+  pages?: Page[];
+  userId?: string;
+  user?: User;
 }
 
 export interface LoginModel {

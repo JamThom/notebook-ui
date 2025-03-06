@@ -1,4 +1,4 @@
-import { LoginModel } from "@/types/api/api";
+import { LoginModel } from "../types/api/api";
 import getBaseUrl from "./utils/getBaseUrl";
 
 const login = async ({ email, password }: LoginModel) => {

@@ -15,8 +15,16 @@ export const useGetPage = ({ id }: { id: string }) => {
 };
 
 export const useDeletePage = () => {
+  const queryClient = useQueryClient();
   const deletePage = useQueryFn('DELETE');
-  return async (id: string) => deletePage(`pages/${id}`);
+  return async (page: Page) => {
+    const book = queryClient.getQueryState([page.bookId]);
+    await deletePage(`pages/${page.id}`);
+    console.log({ book, page, bookId: page.bookId });
+    queryClient.invalidateQueries({
+      queryKey: [page.bookId]
+    });
+  };
 };
 
 export const useCreatePage = () => {
@@ -25,9 +33,10 @@ export const useCreatePage = () => {
 
   return async (body: CreatePageRequest) => {
     await postApi<CreatePageRequest>('pages', body);
-      console.log(PAGES_KEY, BOOKS_KEY, body.bookId, queryClient.getQueryCache());
-      queryClient.invalidateQueries({
-        queryKey: [PAGES_KEY, BOOKS_KEY, body.bookId]
-      });
+    const page = queryClient.getQueryState([body.bookId]);
+    console.log(page, body.bookId);
+    queryClient.invalidateQueries({
+      queryKey: [body.bookId]
+    });
   };
 };

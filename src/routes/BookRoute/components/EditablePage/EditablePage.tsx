@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { border, Box, Button, Textarea } from "@chakra-ui/react";
 import { Book } from "../../../../types/api/api";
 import { useDeletePage } from "../../../../api/queries/pages";
+import { useParams } from "react-router";
 
 interface EditablePageProps {
   page: Book['pages'][0];
@@ -32,10 +33,15 @@ const EditablePage = ({
     }
   };
 
+  const bookId = useParams<{ bookId: string }>().bookId;
+
   const deletePage = useDeletePage();
 
   const removePage = () => {
-    deletePage(page.id);
+    deletePage({
+      ...page,
+      bookId: bookId as string,
+    });
   };
 
   return (
@@ -46,11 +52,11 @@ const EditablePage = ({
       <Textarea
         style={{
             width: "100%",
-            height: "1200px",
+            height: "80vh",
             border: 0,
             borderRadius: "0",
             backgroundColor: "white",
-            boxShadow: "0 10px 15px rgba(0, 0, 0, 0.04)",
+            boxShadow: "rgb(0 0 0 / 6%) 0px 8px 25px 6px",
         }}
         value={editableBookContent}
         onChange={handleContentChange}

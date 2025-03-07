@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Box, Textarea, Button, Heading } from "@chakra-ui/react";
+import { Box, Textarea, Button, Heading, Flex } from "@chakra-ui/react";
 import { BookParams } from "../../types/route-params";
 import { useGetBook } from "../../api";
 import * as signalR from "@microsoft/signalr";
@@ -47,9 +47,9 @@ const BookRoute = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: "20px",
+        gap: "40px",
         padding: "30px",
-        backgroundColor: "blue.50",
+        backgroundColor: "grey.400",
       }}
     >
       <Box
@@ -62,13 +62,20 @@ const BookRoute = () => {
           width: "80vw",
         }}
       >
-        <Heading style={{
-          width: "100%",
-        }}>{book.data?.name}</Heading>
+        <Flex
+            style={{
+              width: "100%",
+              justifyContent: "space-between",
+            }}
+          >
+          <Heading>
+            {book.data?.name}
+          </Heading>
+          <AddPage />
+        </Flex>
         {book.data?.pages.map((page) => (
           <EditablePage key={page.id} page={page} connection={connection} />
         ))}
-        <AddPage />
       </Box>
     </Box>
   );

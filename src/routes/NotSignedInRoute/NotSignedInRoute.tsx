@@ -2,7 +2,7 @@ import routes from "../../config/routes";
 import { Button, Flex, Heading, VStack } from "@chakra-ui/react";
 import { Link } from "react-router";
 
-const HomeRoute = () => {
+const NotSignedInRoute = () => {
   return (
     <VStack spacing={4}>
       <Heading>Welcome to the Bookstore</Heading>
@@ -18,4 +18,4 @@ const HomeRoute = () => {
   );
 };
 
-export default HomeRoute;
+export default NotSignedInRoute;

@@ -1,3 +1,3 @@
-export type BookPageParams = {
+export type BookParams = {
     bookId: string;
 };

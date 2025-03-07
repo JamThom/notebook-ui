@@ -9,6 +9,11 @@
  * ---------------------------------------------------------------
  */
 
+export type CreatePageRequest = {
+  content: string;
+  bookId: string;
+}
+
 export interface BookRequest {
   name: string;
 }
@@ -18,7 +23,7 @@ export interface Book {
   id: string;
   name: string;
   /** @uniqueItems true */
-  pages?: Page[];
+  pages: Page[];
   userId?: string;
   user?: User;
 }
@@ -30,7 +35,7 @@ export interface LoginModel {
 
 export interface Page {
   /** @format uuid */
-  id?: string;
+  id: string;
   title: string | null;
   content: string | null;
   bookId: string | null;

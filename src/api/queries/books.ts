@@ -3,14 +3,14 @@ import useGetQuery from "../utils/useGetQuery";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useQueryFn from "../utils/useQueryFn";
 
-const BOOKS_KEY = 'books';
+export const BOOKS_KEY = 'books';
 
 export const useGetBooks = () => {
   return useGetQuery<Book[]>([BOOKS_KEY], 'notebooks');
 };
 
 export const useGetBook = ({ id }: { id: string }) => {
-  return useGetQuery<Book>([BOOKS_KEY, id], `notebooks/${id}`);
+  return useGetQuery<Book>([id], `notebooks/${id}`);
 };
 
 export const useCreateBook = () => {

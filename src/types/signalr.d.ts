@@ -1,0 +1,1 @@
+declare module '@microsoft/signalr/dist/browser/signalr';

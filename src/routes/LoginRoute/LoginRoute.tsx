@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Heading } from "@chakra-ui/react";
 import Login from "./components/Login/Login";
 
-const LoginPage: React.FC = () => {
+const LoginRoute: React.FC = () => {
   return (
     <Box p={5}>
       <Heading as="h1" mb={5}>
@@ -13,4 +13,4 @@ const LoginPage: React.FC = () => {
   );
 };
 
-export default LoginPage;
+export default LoginRoute;

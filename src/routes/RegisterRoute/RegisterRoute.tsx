@@ -3,7 +3,7 @@ import React from "react";
 import { Box, Heading } from "@chakra-ui/react";
 import Register from "./components/Register/Register";
 
-const RegisterPage: React.FC = () => {
+const RegisterRoute: React.FC = () => {
   return (
     <Box p={5}>
       <Heading as="h1" mb={5}>
@@ -14,4 +14,4 @@ const RegisterPage: React.FC = () => {
   );
 };
 
-export default RegisterPage;
+export default RegisterRoute;

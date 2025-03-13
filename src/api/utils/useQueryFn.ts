@@ -6,7 +6,7 @@ const useQueryFn = (method: 'GET' | 'POST' | 'PUT' | 'DELETE') => {
     const navigate = useNavigate();
     return async <T>(url: string, body?: T) => {
         try {
-            const response = await fetch(`${getBaseUrl()}/${url}`, {
+            const response = await fetch(`${getBaseUrl()}/api/${url}`, {
                 method,
                 credentials: 'include',
                 body: JSON.stringify(body),

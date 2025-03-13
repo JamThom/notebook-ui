@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import {
+  Box,
   Button,
   FormControl,
   FormLabel,
   Input,
-  VStack,
+  Stack,
 } from "@chakra-ui/react";
 import login from "../../../../api/login";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import routes from "../../../../config/routes";
 
 const Login: React.FC = () => {
@@ -30,27 +31,36 @@ const Login: React.FC = () => {
   };
 
   return (
-    <VStack spacing={4} as="form" onSubmit={handleSubmit}>
-      <FormControl id="email" isRequired>
-        <FormLabel>Email</FormLabel>
-        <Input
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </FormControl>
-      <FormControl id="password" isRequired>
-        <FormLabel>Password</FormLabel>
-        <Input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </FormControl>
-      <Button type="submit" colorScheme="teal">
-        Login
-      </Button>
-    </VStack>
+    <Box maxW="md" mx="auto" mt={8} p={6} borderWidth={1} borderRadius="lg">
+      <form onSubmit={handleSubmit}>
+        <Stack spacing={4}>
+          <FormControl id="email" isRequired>
+            <FormLabel>Email</FormLabel>
+            <Input
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </FormControl>
+          <FormControl id="password" isRequired>
+            <FormLabel>Password</FormLabel>
+            <Input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </FormControl>
+          <Button type="submit" colorScheme="teal" size="md" mt={4}>
+            Login
+          </Button>
+          <Link style={{ width: '100%' }} to={routes.register}>
+            <Button flex="1" width="100%" type="button" colorScheme="gray" mr={3}>
+              Register
+            </Button>
+          </Link>
+        </Stack>
+      </form>
+    </Box>
   );
 };
 

@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Box, Textarea, Button, Heading, Flex } from "@chakra-ui/react";
+import { Box, Heading, Flex } from "@chakra-ui/react";
 import { BookParams } from "../../types/route-params";
 import { useGetBook } from "../../api";
 import * as signalR from "@microsoft/signalr";
-import { useCreatePage } from "../../api/queries/pages";
 import EditablePage from "./components/EditablePage/EditablePage";
 import AddPage from "./components/AddPage/AddPage";
+import getBaseUrl from '../../api/utils/getBaseUrl';
 
 const BookRoute = () => {
   const { bookId } = useParams<BookParams>();
@@ -15,7 +15,7 @@ const BookRoute = () => {
 
   useEffect(() => {
     const connection = new signalR.HubConnectionBuilder()
-      .withUrl("http://localhost:5090/pagehub", {
+      .withUrl(`${getBaseUrl()}/pagehub`, {
         withCredentials: true,
       })
       .withAutomaticReconnect()
@@ -60,18 +60,44 @@ const BookRoute = () => {
           gap: "20px",
           maxWidth: "900px",
           width: "80vw",
+          paddingTop: "50px",
         }}
       >
         <Flex
+          style={{
+            width: "100vw",
+            position: "fixed",
+            zIndex: 1,
+            top: "0",
+            left: "0",
+            right: "0",
+            padding: "20px",
+            justifyContent: "center",
+            background: "#f8fafc",
+            overflow: "hidden",
+          }}
+        >
+          <Box
             style={{
-              width: "100%",
+              height: "100px",
+              background: "#ff000000",
+              position: "absolute",
+              top: "100%",
+              width: "80vw",
+              maxWidth: "900px",
+              boxShadow: "rgba(0, 0, 0, 0.06) 0px -5px 25px 6px",
+            }}
+          />
+          <Flex
+            style={{
+              maxWidth: "900px",
+              width: "80vw",
               justifyContent: "space-between",
             }}
           >
-          <Heading>
-            {book.data?.name}
-          </Heading>
-          <AddPage />
+            <Heading>{book.data?.name}</Heading>
+            <AddPage />
+          </Flex>
         </Flex>
         {book.data?.pages.map((page) => (
           <EditablePage key={page.id} page={page} connection={connection} />

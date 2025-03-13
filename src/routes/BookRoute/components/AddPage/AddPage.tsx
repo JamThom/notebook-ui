@@ -16,7 +16,7 @@ const AddPage = () => {
   };
 
   return (
-    <Button onClick={addPage} mt={4}>
+    <Button onClick={addPage} variant="solid">
       Add Page
     </Button>
   );

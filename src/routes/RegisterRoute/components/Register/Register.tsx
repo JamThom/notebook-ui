@@ -9,6 +9,8 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import submitRegistration from "../../../../api/register";
+import routes from "../../../../config/routes";
+import { Link } from "react-router";
 
 type RegisterForm = {
   email: string;
@@ -56,6 +58,11 @@ const Register: React.FC = () => {
           <Button type="submit" colorScheme="teal" size="md" mt={4}>
             Register
           </Button>
+          <Link style={{ width: '100%' }} to={routes.login}>
+            <Button flex="1" width="100%" type="button" colorScheme="gray" mr={3}>
+              Login
+            </Button>
+          </Link>
         </Stack>
       </form>
     </Box>

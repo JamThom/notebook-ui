@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "react-scripts start",
+    "build": "react-scripts build",
     "generate-api-types": "swagger-typescript-api -p http://localhost:5090/swagger/v1/swagger.json -o ./src/types/api -n generated.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

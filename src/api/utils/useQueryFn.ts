@@ -12,6 +12,7 @@ const useQueryFn = (method: 'GET' | 'POST' | 'PUT' | 'DELETE') => {
                 body: JSON.stringify(body),
                 headers: {
                     'Content-Type': 'application/json',
+                    'Origin': 'https://witty-sky-05918a11e.6.azurestaticapps.net', // Add this line
                 },
             });
             if (response.status === 401) {

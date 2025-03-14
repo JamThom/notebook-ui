@@ -1,6 +1,5 @@
 import { CreatePageRequest, Page } from "@/types/api/api";
 import useGetQuery from "../utils/useGetQuery";
-import { BOOKS_KEY } from "./books";
 import useQueryFn from "../utils/useQueryFn";
 import { useQueryClient } from "@tanstack/react-query";
 

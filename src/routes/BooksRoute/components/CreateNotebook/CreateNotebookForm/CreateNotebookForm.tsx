@@ -1,3 +1,4 @@
+import UiButton from "../../../../../ui/Button/Button";
 import { useCreateBook } from "../../../../../api";
 import {
   Button,
@@ -8,20 +9,30 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { useNavigate } from "react-router";
 
 type NotebookForm = {
   notebookName: string;
 };
 
 const CreateNotebookForm = () => {
+
+  const [isPending, setIsPending] = useState(false);
+  
   const { register, handleSubmit } = useForm<NotebookForm>();
+
+  const navigate = useNavigate();
 
   const createBook = useCreateBook();
 
   const onSubmit = async (data: NotebookForm) => {
-    createBook.mutate({
+    setIsPending(true);
+    const { id } = await createBook({
         name: data.notebookName,
     });
+    setIsPending(false);
+    navigate(`/books/${id}`);
   };
 
   return (
@@ -33,9 +44,9 @@ const CreateNotebookForm = () => {
         </FormControl>
         <Flex>
           <Button size="sm">Cancel</Button>
-          <Button type="submit" colorScheme="blue" size="sm">
+          <UiButton type="submit" variant="primary" isPending={isPending}>
             Create
-          </Button>
+          </UiButton>
         </Flex>
       </Stack>
     </form>

@@ -10,14 +10,15 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import CreateNotebookForm from "./CreateNotebookForm/CreateNotebookForm";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const CreateNotebook = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
-      <Button colorScheme="blue" size="sm" onClick={onOpen}>
-        Create Notebook
+      <Button height="100%" colorScheme="gray" size="sm" onClick={onOpen}>
+        <FontAwesomeIcon icon="plus" /> Create Notebook
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

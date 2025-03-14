@@ -9,7 +9,6 @@ const BooksRoute: React.FC = () => {
             <Heading as="h1" size="lg" mb={4}>
                 Books
             </Heading>
-            <CreateNotebook />
             <BookList />
         </Box>
     );

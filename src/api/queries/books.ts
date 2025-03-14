@@ -17,17 +17,39 @@ export const useCreateBook = () => {
   const queryClient = useQueryClient();
   const postApi = useQueryFn('POST');
 
-  const mutation = useMutation({
-    mutationFn: async (body: BookRequest) => {
-      await postApi<BookRequest>('notebooks', body);
-    },
-    onSuccess: (a: any) => {
-      console.log(a);
+  return async (body: BookRequest) => {
+      const data = await postApi<BookRequest>('notebooks', body);
       queryClient.invalidateQueries({
         queryKey: [BOOKS_KEY],
       });
-    },
-  });
+      console.log(data)
+      return await data.json();
+    };
 
-  return mutation;
 };
+
+
+export const useUpdateBook = () => {
+  const queryClient = useQueryClient();
+  const putApi = useQueryFn('PUT');
+  
+  return async (book: Omit<Book,'pages'>) => {
+    const data = await putApi<BookRequest>(`notebooks/${book.id}`, book);
+    queryClient.invalidateQueries({
+      queryKey: [
+        book.id,
+        BOOKS_KEY
+      ],
+    });
+    return await data.json();
+  }
+};
+
+export const useRenameBook = (id: string) => {
+  const updateBook = useUpdateBook();
+
+  return async (name: string) => {
+    const book = await updateBook({ id, name });
+    return book;
+  }
+}

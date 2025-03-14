@@ -6,7 +6,10 @@ import { useGetBook } from "../../api";
 import * as signalR from "@microsoft/signalr";
 import EditablePage from "./components/EditablePage/EditablePage";
 import AddPage from "./components/AddPage/AddPage";
-import getBaseUrl from '../../api/utils/getBaseUrl';
+import getBaseUrl from "../../api/utils/getBaseUrl";
+import Back from "./components/Back/Back";
+import HeaderWrap from "./components/HeaderWrap/HeaderWrap";
+import BookWrapper from "./components/BookWrapper/BookWrapper";
 
 const BookRoute = () => {
   const { bookId } = useParams<BookParams>();
@@ -42,68 +45,18 @@ const BookRoute = () => {
   }
 
   return (
-    <Box
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "40px",
-        padding: "30px",
-        backgroundColor: "grey.400",
-      }}
-    >
-      <Box
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "20px",
-          maxWidth: "900px",
-          width: "80vw",
-          paddingTop: "50px",
-        }}
-      >
-        <Flex
-          style={{
-            width: "100vw",
-            position: "fixed",
-            zIndex: 1,
-            top: "0",
-            left: "0",
-            right: "0",
-            padding: "20px",
-            justifyContent: "center",
-            background: "#f8fafc",
-            overflow: "hidden",
-          }}
-        >
-          <Box
-            style={{
-              height: "100px",
-              background: "#ff000000",
-              position: "absolute",
-              top: "100%",
-              width: "80vw",
-              maxWidth: "900px",
-              boxShadow: "rgba(0, 0, 0, 0.06) 0px -5px 25px 6px",
-            }}
-          />
-          <Flex
-            style={{
-              maxWidth: "900px",
-              width: "80vw",
-              justifyContent: "space-between",
-            }}
-          >
-            <Heading>{book.data?.name}</Heading>
-            <AddPage />
-          </Flex>
-        </Flex>
+    <>
+      <Back />
+      <BookWrapper>
+        <HeaderWrap>
+          <Heading>{book.data?.name}</Heading>
+          <AddPage />
+        </HeaderWrap>
         {book.data?.pages.map((page) => (
           <EditablePage key={page.id} page={page} connection={connection} />
         ))}
-      </Box>
-    </Box>
+      </BookWrapper>
+    </>
   );
 };
 

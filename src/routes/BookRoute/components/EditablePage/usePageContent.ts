@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Page } from "../../../../types/api/api";
+import { Page } from "../../../../types/api";
 import { useDebounce } from 'use-debounce';
 
 const usePageContent = (page: Page, connection: signalR.HubConnection) => {

@@ -1,7 +1,7 @@
-import { RegisterModel } from "@/types/api/api";
+import { RegisterRequest } from "@/types/api";
 import getBaseUrl from "./utils/getBaseUrl";
 
-const register = async (formData: RegisterModel) => {
+const register = async (formData: RegisterRequest) => {
     try {
         await fetch(`${getBaseUrl()}/api/Account/register`, {
             method: 'POST',

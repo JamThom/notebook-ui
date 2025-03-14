@@ -1,7 +1,7 @@
-import { LoginModel } from "../types/api/api";
+import { LoginRequest } from "../types/api";
 import getBaseUrl from "./utils/getBaseUrl";
 
-const login = async ({ email, password }: LoginModel) => {
+const login = async ({ email, password }: LoginRequest) => {
   return await fetch(`${getBaseUrl()}/api/Account/login`, {
     method: 'POST',
     body: JSON.stringify({ email, password }),

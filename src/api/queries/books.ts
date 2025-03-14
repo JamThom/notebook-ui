@@ -1,4 +1,4 @@
-import { Book, BookRequest } from "../../types/api/api";
+import { BookResponse, BooksResponse, CreateBookRequest, UpdateBookRequest } from "../../types/api";
 import useGetQuery from "../utils/useGetQuery";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useQueryFn from "../utils/useQueryFn";
@@ -6,19 +6,19 @@ import useQueryFn from "../utils/useQueryFn";
 export const BOOKS_KEY = 'books';
 
 export const useGetBooks = () => {
-  return useGetQuery<Book[]>([BOOKS_KEY], 'books');
+  return useGetQuery<BooksResponse>([BOOKS_KEY], 'books').data?.items;
 };
 
 export const useGetBook = ({ id }: { id: string }) => {
-  return useGetQuery<Book>([id], `books/${id}`);
+  return useGetQuery<BookResponse>([id], `books/${id}`).data?.item;
 };
 
 export const useCreateBook = () => {
   const queryClient = useQueryClient();
   const postApi = useQueryFn('POST');
 
-  return async (body: BookRequest) => {
-      const data = await postApi<BookRequest>('books', body);
+  return async (body: CreateBookRequest) => {
+      const data = await postApi<CreateBookRequest>('books', body);
       queryClient.invalidateQueries({
         queryKey: [BOOKS_KEY],
       });
@@ -29,15 +29,15 @@ export const useCreateBook = () => {
 };
 
 
-export const useUpdateBook = () => {
+export const useUpdateBook = (id: string) => {
   const queryClient = useQueryClient();
   const putApi = useQueryFn('PUT');
   
-  return async (book: Omit<Book,'pages'>) => {
-    const data = await putApi<BookRequest>(`books/${book.id}`, book);
+  return async (book: Omit<UpdateBookRequest,'pages'>) => {
+    const data = await putApi<UpdateBookRequest>(`books/${id}`, book);
     queryClient.invalidateQueries({
       queryKey: [
-        book.id,
+        id,
         BOOKS_KEY
       ],
     });
@@ -46,10 +46,10 @@ export const useUpdateBook = () => {
 };
 
 export const useRenameBook = (id: string) => {
-  const updateBook = useUpdateBook();
+  const updateBook = useUpdateBook(id);
 
   return async (name: string) => {
-    const book = await updateBook({ id, name });
+    const book = await updateBook({ name });
     return book;
   }
 }

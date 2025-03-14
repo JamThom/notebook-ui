@@ -40,7 +40,7 @@ const BookRoute = () => {
     };
   }, []);
 
-  if (book.isLoading || !connection) {
+  if (!book || !connection) {
     return <div>Loading...</div>;
   }
 
@@ -49,10 +49,10 @@ const BookRoute = () => {
       <Back />
       <BookWrapper>
         <HeaderWrap>
-          <Heading>{book.data?.name}</Heading>
+          <Heading>{book?.name}</Heading>
           <AddPage />
         </HeaderWrap>
-        {book.data?.pages.map((page) => (
+        {book?.pages.map((page) => (
           <EditablePage key={page.id} page={page} connection={connection} />
         ))}
       </BookWrapper>

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Box, Button, Textarea } from "@chakra-ui/react";
-import { Book } from "../../../../types/api/api";
+import { Book } from "../../../../types/api";
 import { useDeletePage } from "../../../../api/queries/pages";
 import { useParams } from "react-router";
 import { useDebounce } from 'use-debounce';

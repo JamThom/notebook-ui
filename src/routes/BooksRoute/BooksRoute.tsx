@@ -10,14 +10,14 @@ const BooksRoute: React.FC = () => {
     const account = useGetAccount();
   return (
     <Box p={4}>
-      <Flex>
-        <Heading as="h1" size="lg" mb={4}>
+      <Flex justifyContent={"space-between"} mb={4}>
+        <Heading as="h1" size="lg" mb={0}>
           Notebooks
         </Heading>
 
         <Menu>
           <MenuButton as={Button} rightIcon={<FontAwesomeIcon icon="caret-down" />}>
-            {account.data?.userName}
+            {account?.userName}
           </MenuButton>
           <MenuList>
             <MenuItem>Log out</MenuItem>

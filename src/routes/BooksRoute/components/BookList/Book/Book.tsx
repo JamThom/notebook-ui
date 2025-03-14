@@ -1,9 +1,9 @@
-import { Box, Flex, Heading, Input, Stack } from "@chakra-ui/react";
-import { Book as ApiBook } from "@/types/api/api";
+import { Box, Flex, Heading, Input, Stack, Text } from "@chakra-ui/react";
+import { Book as ApiBook } from "@/types/api";
 import { Link } from "react-router";
 import routes from "../../../../../config/routes";
 import getRouteUrl from "../../../../../api/utils/getRouteUrl";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface BookProps {
@@ -26,7 +26,7 @@ const getPageStyle = (pageIndex: number) => {
 };
 
 const getBg = (id: string) => {
-  const idToInt = id.indexOf('6') % 9;
+  const idToInt = id.indexOf("6") % 9;
   switch (idToInt) {
     case 0:
       return "linear-gradient(90deg, rgb(255 243 246), rgb(255 224 233), rgb(248 238 240))";
@@ -51,6 +51,10 @@ const Book: React.FC<BookProps> = ({ book }) => {
   const [isRenaming, setIsRenaming] = useState(false);
   const [name, setName] = useState(book.name);
 
+  const allTextContent = useMemo(() => {
+    return book.pages.map((page) => page.content).join(" ");
+  }, [book.pages]);
+
   const handleStartRenaming: React.MouseEventHandler<HTMLHeadingElement> = (
     e
   ) => {
@@ -73,12 +77,30 @@ const Book: React.FC<BookProps> = ({ book }) => {
           margin="0 auto 20px"
         >
           {[0, 1].map((pageIndex) => {
-            const page = book.pages[pageIndex];
+            const pageLength = 450;
+            const pageContent =
+              pageIndex === 0
+                ? allTextContent.slice(0, pageLength)
+                : allTextContent.slice(pageLength);
             return (
-              <Stack gap="0" key={page?.id}>
-                <Box {...getPageStyle(pageIndex)}>{page?.content ?? "This is some content which is 100 words long. This is some content which is 100 words long. And this is some more content. Did I mention that this is 100 words long? Well, it is."}</Box>
-                <Box {...getPageStyle(pageIndex)} height="2px" padding="0" borderTop="1px #ddd solid" />
-                <Box {...getPageStyle(pageIndex)} height="2px" padding="0" borderTop="1px #ddd solid" />
+              <Stack gap="0" key={pageContent}>
+                <Box {...getPageStyle(pageIndex)}>
+                  <Text marginBottom="1" fontWeight="bold">{book.name}</Text>
+                  <Text height="85px" overflow="hidden">{pageContent}</Text>
+                  <Text marginTop="1" textAlign="center">{pageIndex + 1}</Text>
+                </Box>
+                <Box
+                  {...getPageStyle(pageIndex)}
+                  height="2px"
+                  padding="0"
+                  borderTop="1px #ddd solid"
+                />
+                <Box
+                  {...getPageStyle(pageIndex)}
+                  height="2px"
+                  padding="0"
+                  borderTop="1px #ddd solid"
+                />
               </Stack>
             );
           })}
@@ -101,8 +123,8 @@ const Book: React.FC<BookProps> = ({ book }) => {
           <Heading
             onClick={handleStartRenaming}
             textAlign="center"
-            as="h2"
-            size="lg"
+            as="h3"
+            size="md"
           >
             {book.name}
           </Heading>

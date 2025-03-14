@@ -1,8 +1,8 @@
-import { Account } from "@/types/api/api";
+import { AccountResponse } from "../../types/api";
 import useGetQuery from "../utils/useGetQuery";
 
 const ACCOUNT_KEY = 'account';
 
 export const useGetAccount = () => {
-  return useGetQuery<Account>([ACCOUNT_KEY], 'account');
+  return useGetQuery<AccountResponse>([ACCOUNT_KEY], 'account').data?.item;
 };

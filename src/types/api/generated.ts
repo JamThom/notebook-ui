@@ -9,57 +9,55 @@
  * ---------------------------------------------------------------
  */
 
-export interface Book {
-  /** @format uuid */
-  id?: string;
-  name: string | null;
-  /** @uniqueItems true */
-  pages: Page[] | null;
-  userId: string | null;
-  user: User;
+export interface BookResponse {
+  id: string;
+  name: string;
+  pages: PageResponse[];
 }
 
-export interface LoginModel {
-  email: string | null;
-  password: string | null;
+export interface BooksResponse {
+  id: string;
+  name: string;
+  pages: PageResponse[];
 }
 
-export interface Page {
-  /** @format uuid */
-  id?: string;
-  title: string | null;
-  content: string | null;
-  bookId: string | null;
-  book: Book;
+export interface CreateBookRequest {
+  name: string;
 }
 
-export interface RegisterModel {
-  email: string | null;
-  password: string | null;
-  confirmPassword: string | null;
-  userName: string | null;
+export interface CreatePageRequest {
+  content: string;
+  bookId: string;
 }
 
-export interface User {
-  id?: string | null;
-  userName?: string | null;
-  normalizedUserName?: string | null;
-  email?: string | null;
-  normalizedEmail?: string | null;
-  emailConfirmed?: boolean;
-  passwordHash?: string | null;
-  securityStamp?: string | null;
-  concurrencyStamp?: string | null;
-  phoneNumber?: string | null;
-  phoneNumberConfirmed?: boolean;
-  twoFactorEnabled?: boolean;
-  /** @format date-time */
-  lockoutEnd?: string | null;
-  lockoutEnabled?: boolean;
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface PageResponse {
+  id: string;
   /** @format int32 */
-  accessFailedCount?: number;
-  /** @uniqueItems true */
-  books?: Book[] | null;
+  index: number;
+  content: string;
+}
+
+export interface RegisterRequest {
+  email: string;
+  password: string;
+  confirmPassword: string;
+  userName: string;
+}
+
+export interface UpdateAccountRequest {
+  userName?: string;
+  email?: string;
+  newPassword?: string;
+  confirmPassword?: string;
+}
+
+export interface UpdateBookRequest {
+  name: string;
 }
 
 export type QueryParamsType = Record<string | number, any>;
@@ -277,66 +275,93 @@ export class HttpClient<SecurityDataType = unknown> {
  * @version 1.0
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
-  register = {
-    /**
-     * No description
-     *
-     * @tags Account
-     * @name RegisterCreate
-     * @request POST:/register
-     */
-    registerCreate: (data: RegisterModel, params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/register`,
-        method: "POST",
-        body: data,
-        type: ContentType.Json,
-        ...params,
-      }),
-  };
-  login = {
-    /**
-     * No description
-     *
-     * @tags Account
-     * @name LoginCreate
-     * @request POST:/login
-     */
-    loginCreate: (data: LoginModel, params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/login`,
-        method: "POST",
-        body: data,
-        type: ContentType.Json,
-        ...params,
-      }),
-  };
-  logout = {
-    /**
-     * No description
-     *
-     * @tags Account
-     * @name LogoutCreate
-     * @request POST:/logout
-     */
-    logoutCreate: (params: RequestParams = {}) =>
-      this.request<void, any>({
-        path: `/logout`,
-        method: "POST",
-        ...params,
-      }),
-  };
   api = {
     /**
      * No description
      *
-     * @tags Book
-     * @name GetBooks
-     * @request GET:/api/Book
+     * @tags Account
+     * @name AccountRegisterCreate
+     * @request POST:/api/account/register
      */
-    getBooks: (params: RequestParams = {}) =>
-      this.request<Book[], any>({
-        path: `/api/Book`,
+    accountRegisterCreate: (data: RegisterRequest, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/account/register`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Account
+     * @name AccountLoginCreate
+     * @request POST:/api/account/login
+     */
+    accountLoginCreate: (data: LoginRequest, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/account/login`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Account
+     * @name AccountList
+     * @request GET:/api/account
+     */
+    accountList: (params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/account`,
+        method: "GET",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Account
+     * @name AccountUpdate
+     * @request PUT:/api/account
+     */
+    accountUpdate: (data: UpdateAccountRequest, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/account`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Account
+     * @name AccountLogoutCreate
+     * @request POST:/api/account/logout
+     */
+    accountLogoutCreate: (params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/account/logout`,
+        method: "POST",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Book
+     * @name BooksList
+     * @request GET:/api/books
+     */
+    booksList: (params: RequestParams = {}) =>
+      this.request<BooksResponse[], any>({
+        path: `/api/books`,
         method: "GET",
         format: "json",
         ...params,
@@ -346,15 +371,106 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Book
-     * @name BookCreate
-     * @request POST:/api/Book
+     * @name BooksCreate
+     * @request POST:/api/books
      */
-    bookCreate: (data: Book, params: RequestParams = {}) =>
+    booksCreate: (data: CreateBookRequest, params: RequestParams = {}) =>
       this.request<void, any>({
-        path: `/api/Book`,
+        path: `/api/books`,
         method: "POST",
         body: data,
         type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Book
+     * @name BooksUpdate
+     * @request PUT:/api/books/{id}
+     */
+    booksUpdate: (id: string, data: UpdateBookRequest, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/books/${id}`,
+        method: "PUT",
+        body: data,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Book
+     * @name BooksDetail
+     * @request GET:/api/books/{id}
+     */
+    booksDetail: (id: string, params: RequestParams = {}) =>
+      this.request<BookResponse, any>({
+        path: `/api/books/${id}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Book
+     * @name BooksDelete
+     * @request DELETE:/api/books/{id}
+     */
+    booksDelete: (id: string, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/books/${id}`,
+        method: "DELETE",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Page
+     * @name PagesDetail
+     * @request GET:/api/pages/{id}
+     */
+    pagesDetail: (id: string, params: RequestParams = {}) =>
+      this.request<PageResponse, any>({
+        path: `/api/pages/${id}`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Page
+     * @name PagesDelete
+     * @request DELETE:/api/pages/{id}
+     */
+    pagesDelete: (id: string, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/pages/${id}`,
+        method: "DELETE",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Page
+     * @name PagesCreate
+     * @request POST:/api/pages
+     */
+    pagesCreate: (data: CreatePageRequest, params: RequestParams = {}) =>
+      this.request<PageResponse, any>({
+        path: `/api/pages`,
+        method: "POST",
+        body: data,
+        type: ContentType.Json,
+        format: "json",
         ...params,
       }),
   };

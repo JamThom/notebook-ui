@@ -18,6 +18,10 @@ export interface BookRequest {
   name: string;
 }
 
+export type Account = {
+  userName: string;
+};
+
 export interface Book {
   /** @format uuid */
   id: string;

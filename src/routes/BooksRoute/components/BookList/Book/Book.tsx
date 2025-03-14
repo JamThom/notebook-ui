@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Input } from "@chakra-ui/react";
+import { Box, Flex, Heading, Input, Stack } from "@chakra-ui/react";
 import { Book as ApiBook } from "@/types/api/api";
 import { Link } from "react-router";
 import routes from "../../../../../config/routes";
@@ -10,11 +10,50 @@ interface BookProps {
   book: ApiBook;
 }
 
+const getPageStyle = (pageIndex: number) => {
+  return {
+    height: "120px",
+    fontSize: "5px",
+    padding: "8px",
+    boxShadow: "0 0 3px #00000036",
+    background:
+      pageIndex === 0
+        ? "linear-gradient(90deg, #ffffff 70%, #f9f9f9 95%, #dedede)"
+        : "linear-gradient(-90deg, #f9f9f9 70%, #f5f5f5 95%, #dedede)",
+    borderLeft: pageIndex === 1 ? "1px #808080 solid" : undefined,
+    width: "100px",
+  };
+};
+
+const getBg = (id: string) => {
+  const idToInt = id.indexOf('6') % 9;
+  switch (idToInt) {
+    case 0:
+      return "linear-gradient(90deg, rgb(255 243 246), rgb(255 224 233), rgb(248 238 240))";
+    case 2:
+      return "linear-gradient(90deg, rgb(138 138 181), rgb(83 81 216), rgb(134 134 176))";
+    case 3:
+      return "linear-gradient(90deg, rgb(148 159 150), rgb(39 113 62), rgb(144 154 145))";
+    case 4:
+      return "linear-gradient(90deg, rgb(180 180 180), rgb(136 136 136), rgb(189 189 189))";
+    case 5:
+      return "linear-gradient(90deg, rgb(255 240 217), rgb(228 225 186), rgb(247 234 211))";
+    case 6:
+      return "linear-gradient(90deg, rgb(238 211 219), rgb(255 190 209), rgb(234 203 212))";
+    case 7:
+      return "linear-gradient(90deg, rgb(104 104 207), rgb(66 65 131), rgb(99 99 197))";
+    case 8:
+      return "linear-gradient(90deg, rgb(207 135 104), rgb(193 162 148), rgb(220 166 143))";
+  }
+};
+
 const Book: React.FC<BookProps> = ({ book }) => {
   const [isRenaming, setIsRenaming] = useState(false);
   const [name, setName] = useState(book.name);
 
-  const handleStartRenaming: React.MouseEventHandler<HTMLHeadingElement> = (e) => {
+  const handleStartRenaming: React.MouseEventHandler<HTMLHeadingElement> = (
+    e
+  ) => {
     e.stopPropagation();
     e.preventDefault();
     setIsRenaming(true);
@@ -28,29 +67,19 @@ const Book: React.FC<BookProps> = ({ book }) => {
     <Link to={getRouteUrl(routes.book, { bookId: book.id })}>
       <Flex flexDirection="column">
         <Flex
-          borderRadius="2px"
-          padding="2px"
-          paddingTop="1px"
-          background="#111"
+          borderRadius="3px"
+          padding="1px 2px 3px"
+          background={getBg(book.id)}
           margin="0 auto 20px"
         >
           {[0, 1].map((pageIndex) => {
             const page = book.pages[pageIndex];
             return (
-              <Box
-                height="140px"
-                background={
-                  pageIndex === 0
-                    ? "linear-gradient(90deg, #ffffff 70%, #f7f7f7)"
-                    : "linear-gradient(-90deg, #ffffff 70%, #f7f7f7)"
-                }
-                borderLeft={pageIndex === 1 ? "1px #8080805c solid" : undefined}
-                width="110px"
-                borderRadius="1px"
-                key={page?.id}
-              >
-                {page?.content ?? ""}
-              </Box>
+              <Stack gap="0" key={page?.id}>
+                <Box {...getPageStyle(pageIndex)}>{page?.content ?? "This is some content which is 100 words long. This is some content which is 100 words long. And this is some more content. Did I mention that this is 100 words long? Well, it is."}</Box>
+                <Box {...getPageStyle(pageIndex)} height="2px" padding="0" borderTop="1px #ddd solid" />
+                <Box {...getPageStyle(pageIndex)} height="2px" padding="0" borderTop="1px #ddd solid" />
+              </Stack>
             );
           })}
         </Flex>
@@ -69,7 +98,12 @@ const Book: React.FC<BookProps> = ({ book }) => {
             />
           </Flex>
         ) : (
-          <Heading onClick={handleStartRenaming} textAlign="center" as="h2" size="lg">
+          <Heading
+            onClick={handleStartRenaming}
+            textAlign="center"
+            as="h2"
+            size="lg"
+          >
             {book.name}
           </Heading>
         )}

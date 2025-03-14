@@ -17,7 +17,14 @@ const CreateNotebook = () => {
 
   return (
     <>
-      <Button height="100%" colorScheme="gray" size="sm" onClick={onOpen}>
+      <Button
+        height="100%"
+        minHeight="160px"
+        border="2px dashed #b3b7ba"
+        colorScheme="gray"
+        size="sm"
+        onClick={onOpen}
+      >
         <FontAwesomeIcon icon="plus" /> Create Notebook
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>

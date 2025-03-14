@@ -6,11 +6,11 @@ import useQueryFn from "../utils/useQueryFn";
 export const BOOKS_KEY = 'books';
 
 export const useGetBooks = () => {
-  return useGetQuery<Book[]>([BOOKS_KEY], 'notebooks');
+  return useGetQuery<Book[]>([BOOKS_KEY], 'books');
 };
 
 export const useGetBook = ({ id }: { id: string }) => {
-  return useGetQuery<Book>([id], `notebooks/${id}`);
+  return useGetQuery<Book>([id], `books/${id}`);
 };
 
 export const useCreateBook = () => {
@@ -18,7 +18,7 @@ export const useCreateBook = () => {
   const postApi = useQueryFn('POST');
 
   return async (body: BookRequest) => {
-      const data = await postApi<BookRequest>('notebooks', body);
+      const data = await postApi<BookRequest>('books', body);
       queryClient.invalidateQueries({
         queryKey: [BOOKS_KEY],
       });
@@ -34,7 +34,7 @@ export const useUpdateBook = () => {
   const putApi = useQueryFn('PUT');
   
   return async (book: Omit<Book,'pages'>) => {
-    const data = await putApi<BookRequest>(`notebooks/${book.id}`, book);
+    const data = await putApi<BookRequest>(`books/${book.id}`, book);
     queryClient.invalidateQueries({
       queryKey: [
         book.id,

@@ -23,9 +23,10 @@ const CreateNotebook = () => {
         border="2px dashed #b3b7ba"
         colorScheme="gray"
         size="sm"
+        gap="2"
         onClick={onOpen}
       >
-        <FontAwesomeIcon icon="plus" /> Create Notebook
+         Create Notebook <FontAwesomeIcon icon="plus" />
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

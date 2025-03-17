@@ -17,9 +17,10 @@ const BooksRoute: React.FC = () => {
 
         <Menu>
           <MenuButton as={Button} rightIcon={<FontAwesomeIcon icon="caret-down" />}>
-            {account?.userName}
+            <FontAwesomeIcon size="sm" icon="user" /> {account?.userName}
           </MenuButton>
           <MenuList>
+            <MenuItem>Settings</MenuItem>
             <MenuItem>Log out</MenuItem>
           </MenuList>
         </Menu>

@@ -37,14 +37,14 @@ const CreateNotebookForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Stack spacing={4}>
-        <FormControl id="username" isRequired>
-          <FormLabel>Username</FormLabel>
+      <Stack spacing={4} marginBottom="2">
+        <FormControl isRequired>
+          <FormLabel>Name</FormLabel>
           <Input type="text" {...register("notebookName")} />
         </FormControl>
-        <Flex>
-          <Button size="sm">Cancel</Button>
-          <UiButton type="submit" variant="primary" isPending={isPending}>
+        <Flex justifyContent="space-between">
+          <UiButton width="fitContent">Cancel</UiButton>
+          <UiButton type="submit" variant="primary" width="fitContent" isPending={isPending}>
             Create
           </UiButton>
         </Flex>

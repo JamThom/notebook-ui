@@ -22,8 +22,7 @@ export const useCreateBook = () => {
       queryClient.invalidateQueries({
         queryKey: [BOOKS_KEY],
       });
-      console.log(data)
-      return await data.json();
+      return data;
     };
 
 };

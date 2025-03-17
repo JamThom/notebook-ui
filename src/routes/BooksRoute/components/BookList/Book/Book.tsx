@@ -86,7 +86,7 @@ const Book: React.FC<BookProps> = ({ book }) => {
               <Stack gap="0" key={pageContent}>
                 <Box {...getPageStyle(pageIndex)}>
                   <Text marginBottom="1" fontWeight="bold">{book.name}</Text>
-                  <Text height="85px" overflow="hidden">{pageContent}</Text>
+                  <Text height="83px" overflow="hidden">{pageContent}</Text>
                   <Text marginTop="1" textAlign="center">{pageIndex + 1}</Text>
                 </Box>
                 <Box

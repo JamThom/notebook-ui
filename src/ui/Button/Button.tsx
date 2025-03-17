@@ -2,12 +2,13 @@ import { Button, ButtonProps, Spinner } from "@chakra-ui/react";
 import { use, useMemo, useState } from "react";
 
 type UiButtonProps = {
-  type: ButtonProps["type"];
+  type?: ButtonProps["type"];
   variant?: "primary" | "secondary" | "danger";
   onClick?: () => void|Promise<void>;
   width?: string;
   children: React.ReactNode;
   isPending?: boolean;
+  size?: ButtonProps["size"];
 };
 
 const UiButton = ({
@@ -16,7 +17,8 @@ const UiButton = ({
   variant,
   onClick,
   children,
-  isPending
+  isPending,
+  size,
 }: UiButtonProps) => {
 
   const [pending, setPending] = useState(isPending);
@@ -50,7 +52,7 @@ const UiButton = ({
     <Button
       type={type}
       colorScheme={color}
-      size="sm"
+      size={size||'md'}
       width={width||'100%'}
       disabled={pending}
       onClick={handleClick}>

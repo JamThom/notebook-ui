@@ -1,5 +1,4 @@
-import { ChakraProvider } from '@chakra-ui/react';
-import theme from '../src/theme';
+import UiProvider from '../src/ui/Provider/Provider';
 import type { Preview } from '@storybook/react';
 import React from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -21,9 +20,9 @@ const preview: Preview = {
 
 export const decorators = [
   (Story) => (
-    <ChakraProvider theme={theme}>
+    <UiProvider>
       <Story />
-    </ChakraProvider>
+    </UiProvider>
   ),
 ];
 

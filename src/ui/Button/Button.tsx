@@ -8,7 +8,7 @@ export type UiButtonProps = {
   variant?: "primary" | "secondary" | "danger";
   onClick?: () => void | Promise<void>;
   width?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   isPending?: boolean;
   size?: ButtonProps["size"];
   iconRight?: boolean;

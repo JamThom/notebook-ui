@@ -1,9 +1,19 @@
 import getBaseUrl from './getBaseUrl';
 import routes from '@/config/routes';
+import useToast from '@/ui-hooks/useToast/useToast';
 import { useNavigate } from 'react-router';
 
-const useQueryFn = (method: 'GET' | 'POST' | 'PUT' | 'DELETE') => {
+type UseQueryFnConfig = {
+    method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
+    successMessage?: string;
+}
+
+const useQueryFn = ({
+    method,
+    successMessage,
+}: UseQueryFnConfig) => {
     const navigate = useNavigate();
+    const { showSuccessToast, showErrorToast } = useToast();
     return async <T>(url: string, body?: T) => {
         try {
             const response = await fetch(`${getBaseUrl()}/api/${url}`, {
@@ -12,9 +22,15 @@ const useQueryFn = (method: 'GET' | 'POST' | 'PUT' | 'DELETE') => {
                 body: JSON.stringify(body),
                 headers: {
                     'Content-Type': 'application/json',
-                    // 'Origin': location.origin
                 },
             });
+            if (response.ok) {
+                if (successMessage) {
+                    showSuccessToast(successMessage);
+                }
+            } else {
+                showErrorToast(response.statusText);
+            }
             if (response.status === 401) {
                 navigate(routes.login);
                 return;

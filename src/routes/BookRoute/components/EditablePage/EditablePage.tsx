@@ -1,10 +1,9 @@
 import { Box, Flex, Textarea } from "@chakra-ui/react";
 import { Book } from "@/types/api";
 import { useDeletePage } from "@/api/queries/pages";
-import { useParams } from "react-router";
 import usePageContent from "./usePageContent";
-import UiButton from "@/ui/Button/Button";
 import UiRemoveButton from "@/ui/RemoveButton/RemoveButton";
+import { useGetCurrentBook } from "@/api";
 
 interface EditablePageProps {
   page: Book["pages"][0];
@@ -17,14 +16,14 @@ const EditablePage = ({ page, connection }: EditablePageProps) => {
     connection
   );
 
-  const bookId = useParams<{ bookId: string }>().bookId;
+  const book = useGetCurrentBook();
 
   const deletePage = useDeletePage();
 
-  const removePage = () => {
-    deletePage({
+  const removePage = async () => {
+    await deletePage({
       ...page,
-      bookId: bookId as string,
+      bookId: book?.id as string,
     });
   };
 
@@ -59,7 +58,11 @@ const EditablePage = ({ page, connection }: EditablePageProps) => {
         }}
         mt={4}
       >
-        <UiRemoveButton onRemove={removePage} />
+        {
+          book && book.pages.length > 1 && (
+            <UiRemoveButton onRemove={removePage} />
+          )
+        }
       </Flex>
     </Box>
   );

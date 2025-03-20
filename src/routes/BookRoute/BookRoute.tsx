@@ -1,6 +1,4 @@
-import { useParams } from "react-router-dom";
-import { BookParams } from "@/types/route-params";
-import { useGetBook } from "@/api";
+import { useGetCurrentBook } from "@/api";
 import EditablePage from "./components/EditablePage/EditablePage";
 import AddPage from "./components/AddPage/AddPage";
 import Back from "./components/Back/Back";
@@ -10,8 +8,7 @@ import usePageConnection from "./usePageConnection";
 import UiHeading from "@/ui/Heading/Heading";
 
 const BookRoute = () => {
-  const { bookId } = useParams<BookParams>();
-  const book = useGetBook({ id: bookId as string });
+  const book = useGetCurrentBook();
   const connection = usePageConnection();
 
   if (!book || !connection) {

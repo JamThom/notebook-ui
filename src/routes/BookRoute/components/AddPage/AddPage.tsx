@@ -8,8 +8,8 @@ const AddPage = () => {
 
   const createPage = useCreatePage();
 
-  const addPage = () => {
-    createPage({
+  const addPage = async () => {
+    await createPage({
       content: "",
       bookId: bookId as string,
     });

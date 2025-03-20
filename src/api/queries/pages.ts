@@ -11,11 +11,13 @@ export const useGetPage = ({ id }: { id: string }) => {
 
 export const useDeletePage = () => {
   const queryClient = useQueryClient();
-  const deletePage = useQueryFn('DELETE');
+  const deletePage = useQueryFn({
+    method: 'DELETE',
+    successMessage: 'Page deleted successfully'
+  });
   return async (page: PageResponse['item']) => {
     const book = queryClient.getQueryState([page.bookId]);
     await deletePage(`pages/${page.id}`);
-    console.log({ book, page, bookId: page.bookId });
     queryClient.invalidateQueries({
       queryKey: [page.bookId]
     });
@@ -24,12 +26,13 @@ export const useDeletePage = () => {
 
 export const useCreatePage = () => {
   const queryClient = useQueryClient();
-  const postApi = useQueryFn('POST');
+  const postApi = useQueryFn({
+    method: 'POST',
+    successMessage: 'Page created successfully'
+  });
 
   return async (body: CreatePageRequest) => {
     await postApi<CreatePageRequest>('pages', body);
-    const page = queryClient.getQueryState([body.bookId]);
-    console.log(page, body.bookId);
     queryClient.invalidateQueries({
       queryKey: [body.bookId]
     });

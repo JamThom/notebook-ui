@@ -7,12 +7,12 @@ import CreateNotebook from "../CreateNotebook/CreateNotebook";
 const BookList: React.FC = () => {
   const books = useGetBooks();
 
-  return Array.isArray(books) && (
+  return Array.isArray(books) ? (
     <Grid templateColumns="repeat(auto-fill, minmax(200px, 1fr))" gap={6}>
       {books?.map((book, i) => <Book index={i} key={book.id} book={book} />)}
       <CreateNotebook />
     </Grid>
-  );
+  ) : null;
 };
 
 export default BookList;

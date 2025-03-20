@@ -1,7 +1,7 @@
 import { RegisterRequest } from "@/types/api";
-import getBaseUrl from "./utils/getBaseUrl";
+import getBaseUrl from "@/utils/getBaseUrl/getBaseUrl";
 
-const register = async (formData: RegisterRequest) => {
+export const register = async (formData: RegisterRequest) => {
     try {
         await fetch(`${getBaseUrl()}/api/Account/register`, {
             method: 'POST',
@@ -15,5 +15,3 @@ const register = async (formData: RegisterRequest) => {
         console.error(err);
     }
 };
-
-export default register;

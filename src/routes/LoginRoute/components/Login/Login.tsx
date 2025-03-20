@@ -6,7 +6,7 @@ import {
   Input,
   Stack,
 } from "@chakra-ui/react";
-import login from "@/api/login";
+import { login } from "@/api";
 import { Link, useNavigate } from "react-router";
 import routes from "@/config/routes";
 import UiButton from "@/ui/Button/Button";

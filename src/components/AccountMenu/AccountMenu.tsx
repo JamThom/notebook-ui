@@ -1,12 +1,17 @@
 import React from "react";
 import { Button, Flex, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useGetAccount } from "@/api/queries/account";
+import { useGetAccount } from "@/api";
+import { logOut } from "@/api";
 
 const AccountMenu: React.FC = () => {
   const account = useGetAccount();
 
   if (!account) return null;
+
+  const handleLogOut = async () => {
+    await logOut();
+  };
 
   return (
     <Flex position="fixed" right={4} top={4} zIndex={2}>
@@ -19,7 +24,7 @@ const AccountMenu: React.FC = () => {
         </MenuButton>
         <MenuList>
           <MenuItem>Settings</MenuItem>
-          <MenuItem>Log out</MenuItem>
+          <MenuItem onClick={handleLogOut}>Logout</MenuItem>
         </MenuList>
       </Menu>
     </Flex>

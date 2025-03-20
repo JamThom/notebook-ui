@@ -8,7 +8,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import submitRegistration from "@/api/register";
+import { register as submitRegistration } from "@/api";
 import routes from "@/config/routes";
 import { Link } from "react-router";
 import UiButton from "@/ui/Button/Button";

@@ -1,7 +1,7 @@
-import { LoginRequest } from "../types/api";
-import getBaseUrl from "./utils/getBaseUrl";
+import { LoginRequest } from "@/types/api";
+import getBaseUrl from "@/utils/getBaseUrl/getBaseUrl";
 
-const login = async ({ email, password }: LoginRequest) => {
+export const login = async ({ email, password }: LoginRequest) => {
   return await fetch(`${getBaseUrl()}/api/Account/login`, {
     method: 'POST',
     body: JSON.stringify({ email, password }),
@@ -11,5 +11,3 @@ const login = async ({ email, password }: LoginRequest) => {
     }
   });
 };
-
-export default login;

@@ -1,4 +1,4 @@
-import getBaseUrl from './getBaseUrl';
+import getBaseUrl from '@/utils/getBaseUrl/getBaseUrl';
 import routes from '@/config/routes';
 import useToast from '@/ui-hooks/useToast/useToast';
 import { useNavigate } from 'react-router';

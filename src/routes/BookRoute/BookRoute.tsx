@@ -5,9 +5,8 @@ import Back from "./components/Back/Back";
 import HeaderWrap from "./components/HeaderWrap/HeaderWrap";
 import BookWrapper from "./components/BookWrapper/BookWrapper";
 import usePageConnection from "./usePageConnection";
-import UiHeading from "@/ui/Heading/Heading";
 import DeleteBook from "./components/DeleteBook/DeleteBook";
-import { Flex, Spinner } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import EditableHeading from "./components/EditableHeading/EditableHeading";
 
 const BookRoute = () => {

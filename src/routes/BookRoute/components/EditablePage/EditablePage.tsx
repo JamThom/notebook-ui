@@ -1,6 +1,6 @@
 import { Box, Flex, Textarea } from "@chakra-ui/react";
 import { Book } from "@/types/api";
-import { useDeletePage } from "@/api/queries/pages";
+import { useDeletePage } from "@/api";
 import usePageContent from "./usePageContent";
 import UiRemoveButton from "@/ui/RemoveButton/RemoveButton";
 import { useGetCurrentBook } from "@/api";

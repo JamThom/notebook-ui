@@ -21,7 +21,7 @@ const UiIconButton = ({ icon, onClick, size }: UiIconButtonProps) => {
   };
 
   return (
-    <Button size={size || "md"} disabled={pending} onClick={handleClick}>
+    <Button width="3" size={size || "md"} disabled={pending} onClick={handleClick}>
       {pending ? <Spinner size="sm" color="white" /> : <UiIcon icon={icon} />}
     </Button>
   );

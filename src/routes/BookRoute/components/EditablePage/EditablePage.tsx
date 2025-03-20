@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from "react";
-import { Box, Button, Textarea } from "@chakra-ui/react";
+import { Box, Flex, Textarea } from "@chakra-ui/react";
 import { Book } from "../../../../types/api";
 import { useDeletePage } from "../../../../api/queries/pages";
 import { useParams } from "react-router";
-import { useDebounce } from 'use-debounce';
+import { useDebounce } from "use-debounce";
 import usePageContent from "./usePageContent";
+import UiButton from "@/ui/Button/Button";
 
 interface EditablePageProps {
   page: Book["pages"][0];
@@ -12,7 +13,10 @@ interface EditablePageProps {
 }
 
 const EditablePage = ({ page, connection }: EditablePageProps) => {
-  const [editableBookContent, setEditableBookContent] = usePageContent(page, connection);
+  const [editableBookContent, setEditableBookContent] = usePageContent(
+    page,
+    connection
+  );
 
   const bookId = useParams<{ bookId: string }>().bookId;
 
@@ -48,17 +52,18 @@ const EditablePage = ({ page, connection }: EditablePageProps) => {
         placeholder="Edit book content here..."
         size="lg"
       />
-      <Button
+      <Flex
         style={{
           position: "absolute",
           right: "20px",
           bottom: "20px",
         }}
         mt={4}
-        onClick={removePage}
       >
-        Remove
-      </Button>
+        <UiButton onClick={removePage} icon="trash">
+          Remove
+        </UiButton>
+      </Flex>
     </Box>
   );
 };

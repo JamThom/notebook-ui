@@ -5,7 +5,6 @@ import LoginRoute from "./routes/LoginRoute/LoginRoute";
 import BookRoute from "./routes/BookRoute/BookRoute";
 import BooksRoute from "./routes/BooksRoute/BooksRoute";
 import RegisterRoute from "./routes/RegisterRoute/RegisterRoute";
-import NotSignedInRoute from "./routes/NotSignedInRoute/NotSignedInRoute";
 import routes from "./config/routes";
 import ApiProvider from "./api/ApiProvider";
 
@@ -15,7 +14,6 @@ const App = () => {
       <ApiProvider>
         <BrowserRouter>
           <Routes>
-            <Route path={routes.notSignedIn} element={<NotSignedInRoute />} />
             <Route path={routes.login} element={<LoginRoute />} />
             <Route path={routes.register} element={<RegisterRoute />} />
             <Route path={routes.book} element={<BookRoute />} />

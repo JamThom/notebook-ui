@@ -10,6 +10,7 @@ import {
 import login from "../../../../api/login";
 import { Link, useNavigate } from "react-router";
 import routes from "../../../../config/routes";
+import UiButton from "@/ui/Button/Button";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -50,13 +51,13 @@ const Login: React.FC = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </FormControl>
-          <Button type="submit" colorScheme="teal" size="md" mt={4}>
+          <UiButton variant="primary" type="submit" width="100%" icon="sign-in">
             Login
-          </Button>
+          </UiButton>
           <Link style={{ width: '100%' }} to={routes.register}>
-            <Button flex="1" width="100%" type="button" colorScheme="gray" mr={3}>
+            <UiButton width="100%" type="button" variant="secondary" icon="user-plus">
               Register
-            </Button>
+            </UiButton>
           </Link>
         </Stack>
       </form>

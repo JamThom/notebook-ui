@@ -4,6 +4,5 @@ const routes = {
     register: '/register',
     books: '/books',
     book: '/books/:bookId',
-    notSignedIn: '/not-signed-in'
 };
 export default routes;

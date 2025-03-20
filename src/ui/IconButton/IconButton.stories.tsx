@@ -12,6 +12,6 @@ type Story = StoryObj<typeof IconButton>;
 export const Primary: Story = {
   args: {
     icon: 'coffee',
-    onClick: () => new Promise((resolve) => setTimeout(resolve, 1000)),
+    onClick: () => console.log('clicked')
   },
 };

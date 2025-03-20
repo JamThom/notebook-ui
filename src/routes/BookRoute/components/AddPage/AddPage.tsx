@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { Button } from "@chakra-ui/react";
 import { BookParams } from "../../../../types/route-params";
 import { useCreatePage } from "../../../../api/queries/pages";
+import UiCreateButton from "@/ui/CreateButton/CreateButton";
 
 const AddPage = () => {
   const { bookId } = useParams<BookParams>();
@@ -16,9 +17,9 @@ const AddPage = () => {
   };
 
   return (
-    <Button onClick={addPage} variant="solid">
+    <UiCreateButton onClick={addPage}>
       Add Page
-    </Button>
+    </UiCreateButton>
   );
 };
 

@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import { Button } from "@chakra-ui/react";
 import { BookParams } from "@/types/route-params";
 import { useCreatePage } from "@/api/queries/pages";
 import UiCreateButton from "@/ui/CreateButton/CreateButton";

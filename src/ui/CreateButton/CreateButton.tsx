@@ -6,7 +6,9 @@ type UiCreateButtonProps = Omit<UiButtonProps, "icon"|"variant"|'iconRight'>;
 const UiCreateButton = (args: UiCreateButtonProps) => {
 
   return (
-    <UiButton {...args} icon="plus" iconRight variant="primary" />
+    <UiButton {...args} icon="plus" iconRight variant="primary">
+      {args.children??'Create'}
+    </UiButton>
   );
 };
 

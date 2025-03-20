@@ -5,7 +5,7 @@ import UiIcon from "../Icon/Icon";
 
 export type UiButtonProps = {
   type?: ButtonProps["type"];
-  variant?: "primary" | "secondary" | "danger";
+  variant?: "primary" | "secondary" | "danger" | "ok";
   onClick?: () => void | Promise<void>;
   width?: string;
   children?: React.ReactNode;
@@ -34,6 +34,8 @@ const UiButton = ({
 
   const color = useMemo(() => {
     switch (variant) {
+      case "ok":
+        return "green";
       case "primary":
         return "blue";
       case "secondary":

@@ -11,18 +11,17 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import UiCreateButton from "@/ui/CreateButton/CreateButton";
 import UiCancelButton from "@/ui/CancelButton/CancelButton";
+import useModalManager from "@/ui-hooks/useModalManager/useModalManager";
 
 type NotebookForm = {
   notebookName: string;
 };
 
-const CreateNotebookForm = ({
-  onCancel,
-}: {
-  onCancel: () => void;
-}) => {
+const CreateNotebookForm = () => {
 
   const [isPending, setIsPending] = useState(false);
+
+  const { closeModal } = useModalManager();
   
   const { register, handleSubmit } = useForm<NotebookForm>();
 
@@ -36,6 +35,7 @@ const CreateNotebookForm = ({
         name: data.notebookName,
     });
     setIsPending(false);
+    closeModal();
     navigate(`/books/${id}`);
   };
 
@@ -47,10 +47,8 @@ const CreateNotebookForm = ({
           <Input type="text" {...register("notebookName")} />
         </FormControl>
         <Flex justifyContent="space-between">
-          <UiCancelButton onClick={onCancel} width="fitContent">Cancel</UiCancelButton>
-          <UiCreateButton type="submit" width="fitContent" isPending={isPending}>
-            Create
-          </UiCreateButton>
+          <UiCancelButton onClick={closeModal} />
+          <UiCreateButton type="submit" width="fitContent" isPending={isPending} />
         </Flex>
       </Stack>
     </form>

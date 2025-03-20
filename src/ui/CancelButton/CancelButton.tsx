@@ -6,7 +6,9 @@ type UiCancelButtonProps = Omit<UiButtonProps, "icon"|"variant">;
 const UiCancelButton = (args: UiCancelButtonProps) => {
 
   return (
-    <UiButton {...args} icon="times" variant="secondary" />
+    <UiButton {...args} icon="times" variant="secondary">
+      {args.children || "Cancel"}
+    </UiButton>
   );
 };
 

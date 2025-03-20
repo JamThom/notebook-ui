@@ -1,18 +1,20 @@
 import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
-  useDisclosure,
+  Button
 } from "@chakra-ui/react";
 import CreateNotebookForm from "./CreateNotebookForm/CreateNotebookForm";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useModalManager from "@/ui-hooks/useModalManager/useModalManager";
+import UiIcon from "@/ui/Icon/Icon";
 
 const CreateNotebook = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const { openModal } = useModalManager();
+
+  const openCreateNotebookModal = () => {
+    openModal({
+      title: "Create Notebook",
+      content: <CreateNotebookForm />,
+    });
+  }
 
   return (
     <>
@@ -23,20 +25,10 @@ const CreateNotebook = () => {
         colorScheme="gray"
         size="sm"
         gap="2"
-        onClick={onOpen}
+        onClick={openCreateNotebookModal}
       >
-         Create Notebook <FontAwesomeIcon icon="plus" />
+         Create Notebook <UiIcon icon="plus" />
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Create Notebook</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <CreateNotebookForm onCancel={onClose} />
-          </ModalBody>
-        </ModalContent>
-      </Modal>
     </>
   );
 };

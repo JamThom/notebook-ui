@@ -32,7 +32,7 @@ const UiModal = ({ children, title, footer, onClose }: UiModalProps) => {
         <ModalHeader>{title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>{children}</ModalBody>
-        <ModalFooter>{footer}</ModalFooter>
+        <ModalFooter gap="2">{footer}</ModalFooter>
       </ModalContent>
     </Modal>
   );

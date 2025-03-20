@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import submitRegistration from "@/api/register";
 import routes from "@/config/routes";
 import { Link } from "react-router";
+import UiButton from "@/ui/Button/Button";
 
 type RegisterForm = {
   email: string;
@@ -55,13 +56,13 @@ const Register: React.FC = () => {
             <FormLabel>Confirm Password</FormLabel>
             <Input type="password" {...register("confirmPassword")} />
           </FormControl>
-          <Button type="submit" colorScheme="teal" size="md" mt={4}>
+          <UiButton type="submit" width="100%" icon="user-plus">
             Register
-          </Button>
+          </UiButton>
           <Link style={{ width: '100%' }} to={routes.login}>
-            <Button flex="1" width="100%" type="button" colorScheme="gray" mr={3}>
+            <UiButton width="100%" type="button" variant="secondary" icon="sign-in">
               Login
-            </Button>
+            </UiButton>
           </Link>
         </Stack>
       </form>

@@ -1,7 +1,5 @@
-import UiButton from "../../../../../ui/Button/Button";
 import { useCreateBook } from "../../../../../api";
 import {
-  Button,
   Flex,
   FormControl,
   FormLabel,
@@ -11,12 +9,18 @@ import {
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import UiCreateButton from "../../../../../ui/CreateButton/CreateButton";
+import UiCancelButton from "../../../../../ui/CancelButton/CancelButton";
 
 type NotebookForm = {
   notebookName: string;
 };
 
-const CreateNotebookForm = () => {
+const CreateNotebookForm = ({
+  onCancel,
+}: {
+  onCancel: () => void;
+}) => {
 
   const [isPending, setIsPending] = useState(false);
   
@@ -43,10 +47,10 @@ const CreateNotebookForm = () => {
           <Input type="text" {...register("notebookName")} />
         </FormControl>
         <Flex justifyContent="space-between">
-          <UiButton width="fitContent">Cancel</UiButton>
-          <UiButton type="submit" variant="primary" width="fitContent" isPending={isPending}>
+          <UiCancelButton onClick={onCancel} width="fitContent">Cancel</UiCancelButton>
+          <UiCreateButton type="submit" width="fitContent" isPending={isPending}>
             Create
-          </UiButton>
+          </UiCreateButton>
         </Flex>
       </Stack>
     </form>

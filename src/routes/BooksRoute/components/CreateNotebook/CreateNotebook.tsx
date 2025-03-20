@@ -34,7 +34,7 @@ const CreateNotebook = () => {
           <ModalHeader>Create Notebook</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <CreateNotebookForm />
+            <CreateNotebookForm onCancel={onClose} />
           </ModalBody>
         </ModalContent>
       </Modal>

@@ -1,7 +1,9 @@
 import { Button, ButtonProps, Spinner } from "@chakra-ui/react";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { use, useMemo, useState } from "react";
+import UiIcon from "../Icon/Icon";
 
-type UiButtonProps = {
+export type UiButtonProps = {
   type?: ButtonProps["type"];
   variant?: "primary" | "secondary" | "danger";
   onClick?: () => void|Promise<void>;
@@ -9,6 +11,7 @@ type UiButtonProps = {
   children: React.ReactNode;
   isPending?: boolean;
   size?: ButtonProps["size"];
+  icon: IconProp;
 };
 
 const UiButton = ({
@@ -19,6 +22,7 @@ const UiButton = ({
   children,
   isPending,
   size,
+  icon,
 }: UiButtonProps) => {
 
   const [pending, setPending] = useState(isPending);
@@ -59,6 +63,7 @@ const UiButton = ({
       {pending ? (
         <Spinner size="sm" color="white" />
       ) : children}
+      <UiIcon icon={icon} />
     </Button>
   );
 };

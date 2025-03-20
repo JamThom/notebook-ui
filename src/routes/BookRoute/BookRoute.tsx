@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import { Heading } from "@chakra-ui/react";
 import { BookParams } from "@/types/route-params";
 import { useGetBook } from "@/api";
 import EditablePage from "./components/EditablePage/EditablePage";
@@ -8,6 +7,7 @@ import Back from "./components/Back/Back";
 import HeaderWrap from "./components/HeaderWrap/HeaderWrap";
 import BookWrapper from "./components/BookWrapper/BookWrapper";
 import usePageConnection from "./usePageConnection";
+import UiHeading from "@/ui/Heading/Heading";
 
 const BookRoute = () => {
   const { bookId } = useParams<BookParams>();
@@ -23,7 +23,7 @@ const BookRoute = () => {
       <Back />
       <BookWrapper>
         <HeaderWrap>
-          <Heading>{book?.name}</Heading>
+          <UiHeading>{book?.name}</UiHeading>
           <AddPage />
         </HeaderWrap>
         {book?.pages.map((page) => (

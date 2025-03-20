@@ -1,5 +1,6 @@
+import UiHeading from "@/ui/Heading/Heading";
 import UiIcon from "@/ui/Icon/Icon";
-import { Flex, Heading } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { useState } from "react";
 
 interface EditableHeadingProps {
@@ -23,7 +24,7 @@ const EditableHeading = ({ bookName, onSave }: EditableHeadingProps) => {
         </Flex>
       ) : (
         <Flex>
-          <Heading>{bookName}</Heading>
+          <UiHeading>{bookName}</UiHeading>
           <UiIcon icon="edit" />
         </Flex>
       )}

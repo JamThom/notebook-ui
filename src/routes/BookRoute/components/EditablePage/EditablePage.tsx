@@ -4,6 +4,7 @@ import { useDeletePage } from "@/api/queries/pages";
 import { useParams } from "react-router";
 import usePageContent from "./usePageContent";
 import UiButton from "@/ui/Button/Button";
+import UiRemoveButton from "@/ui/RemoveButton/RemoveButton";
 
 interface EditablePageProps {
   page: Book["pages"][0];
@@ -58,9 +59,7 @@ const EditablePage = ({ page, connection }: EditablePageProps) => {
         }}
         mt={4}
       >
-        <UiButton onClick={removePage} icon="trash">
-          Remove
-        </UiButton>
+        <UiRemoveButton onRemove={removePage} />
       </Flex>
     </Box>
   );

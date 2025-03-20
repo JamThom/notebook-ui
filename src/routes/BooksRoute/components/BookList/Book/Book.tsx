@@ -1,8 +1,8 @@
 import { Box, Flex, Heading, Input, Stack, Text } from "@chakra-ui/react";
 import { Book as ApiBook } from "@/types/api";
 import { Link } from "react-router";
-import routes from "../../../../../config/routes";
-import getRouteUrl from "../../../../../api/utils/getRouteUrl";
+import routes from "@/config/routes";
+import getRouteUrl from "@/api/utils/getRouteUrl";
 import { useMemo, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

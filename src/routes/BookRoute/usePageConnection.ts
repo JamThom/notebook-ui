@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import * as signalR from "@microsoft/signalr";
-import getBaseUrl from "../../api/utils/getBaseUrl";
+import getBaseUrl from "@/api/utils/getBaseUrl";
 
 const usePageConnection = () => {
 

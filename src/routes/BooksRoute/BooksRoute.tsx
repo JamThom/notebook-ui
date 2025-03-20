@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Button, Flex, Heading, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import BookList from "./components/BookList/BookList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useGetAccount } from "../../api/queries/account";
+import { useGetAccount } from "@/api/queries/account";
 
 const BooksRoute: React.FC = () => {
 

@@ -1,4 +1,4 @@
-import { Page } from "../../../../../types/api";
+import { Page } from "@/types/api";
 import { Box } from "@chakra-ui/react";
 
 type PageNavItemProps = {

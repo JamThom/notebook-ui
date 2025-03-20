@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Grid, Spinner, Text } from "@chakra-ui/react";
-import { useGetBooks } from "../../../../api";
+import { useGetBooks } from "@/api";
 import Book from "./Book/Book";
 import CreateNotebook from "../CreateNotebook/CreateNotebook";
 

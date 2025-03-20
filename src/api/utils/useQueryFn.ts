@@ -1,5 +1,5 @@
 import getBaseUrl from './getBaseUrl';
-import routes from '../../config/routes';
+import routes from '@/config/routes';
 import { useNavigate } from 'react-router';
 
 const useQueryFn = (method: 'GET' | 'POST' | 'PUT' | 'DELETE') => {

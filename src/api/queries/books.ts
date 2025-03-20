@@ -1,4 +1,4 @@
-import { BookResponse, BooksResponse, CreateBookRequest, UpdateBookRequest } from "../../types/api";
+import { BookResponse, BooksResponse, CreateBookRequest, UpdateBookRequest } from "@/types/api";
 import useGetQuery from "../utils/useGetQuery";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useQueryFn from "../utils/useQueryFn";

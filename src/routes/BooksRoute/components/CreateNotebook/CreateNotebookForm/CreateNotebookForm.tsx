@@ -1,4 +1,4 @@
-import { useCreateBook } from "../../../../../api";
+import { useCreateBook } from "@/api";
 import {
   Flex,
   FormControl,
@@ -9,8 +9,8 @@ import {
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import UiCreateButton from "../../../../../ui/CreateButton/CreateButton";
-import UiCancelButton from "../../../../../ui/CancelButton/CancelButton";
+import UiCreateButton from "@/ui/CreateButton/CreateButton";
+import UiCancelButton from "@/ui/CancelButton/CancelButton";
 
 type NotebookForm = {
   notebookName: string;

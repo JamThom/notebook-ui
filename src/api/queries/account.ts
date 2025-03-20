@@ -1,4 +1,4 @@
-import { AccountResponse } from "../../types/api";
+import { AccountResponse } from "@/types/api";
 import useGetQuery from "../utils/useGetQuery";
 
 const ACCOUNT_KEY = 'account';

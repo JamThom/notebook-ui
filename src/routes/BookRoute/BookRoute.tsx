@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { Heading } from "@chakra-ui/react";
-import { BookParams } from "../../types/route-params";
-import { useGetBook } from "../../api";
+import { BookParams } from "@/types/route-params";
+import { useGetBook } from "@/api";
 import EditablePage from "./components/EditablePage/EditablePage";
 import AddPage from "./components/AddPage/AddPage";
 import Back from "./components/Back/Back";

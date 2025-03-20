@@ -7,9 +7,9 @@ import {
   Input,
   Stack,
 } from "@chakra-ui/react";
-import login from "../../../../api/login";
+import login from "@/api/login";
 import { Link, useNavigate } from "react-router";
-import routes from "../../../../config/routes";
+import routes from "@/config/routes";
 import UiButton from "@/ui/Button/Button";
 
 const Login: React.FC = () => {

@@ -1,4 +1,4 @@
-import { Page } from "../../../../types/api";
+import { Page } from "@/types/api";
 import { VStack } from "@chakra-ui/react"
 import PageNavItem from "./PageNavItem/PageNavItem";
 

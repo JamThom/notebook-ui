@@ -1,8 +1,8 @@
-import routes from "../../../../config/routes";
+import routes from "@/config/routes";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router";
 import { Box } from "@chakra-ui/react";
-import UiIcon from "../../../../ui/Icon/Icon";
+import UiIcon from "@/ui/Icon/Icon";
 
 const Back = () => {
   return (

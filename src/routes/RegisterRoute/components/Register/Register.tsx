@@ -23,17 +23,21 @@ type RegisterForm = {
 const Register: React.FC = () => {
   const { register, handleSubmit } = useForm<RegisterForm>();
 
-  const handleSubmitRegistration = (data: RegisterForm) => {
+  const [pending, setPending] = React.useState(false);
+
+  const handleSubmitRegistration = async (data: RegisterForm) => {
+    setPending(true);
     if (data.password !== data.confirmPassword) {
       alert("Passwords do not match");
       return;
     }
-    submitRegistration({
+    await submitRegistration({
       email: data.email,
       password: data.password,
       confirmPassword: data.confirmPassword,
       userName: data.userName,
     });
+    setPending(false);
   };
 
   return (
@@ -56,11 +60,20 @@ const Register: React.FC = () => {
             <FormLabel>Confirm Password</FormLabel>
             <Input type="password" {...register("confirmPassword")} />
           </FormControl>
-          <UiButton type="submit" width="100%" icon="user-plus">
+          <UiButton
+            isPending={pending}
+            variant="primary"
+            type="submit"
+            width="100%"
+            icon="user-plus">
             Register
           </UiButton>
           <Link style={{ width: '100%' }} to={routes.login}>
-            <UiButton width="100%" type="button" variant="secondary" icon="sign-in">
+            <UiButton
+              width="100%"
+              type="button"
+              variant="secondary"
+              icon="sign-in">
               Login
             </UiButton>
           </Link>

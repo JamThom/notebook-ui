@@ -1,6 +1,6 @@
 import { Button, ButtonProps, Flex, Spinner } from "@chakra-ui/react";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import UiIcon from "../Icon/Icon";
 
 export type UiButtonProps = {
@@ -28,7 +28,7 @@ const UiButton = ({
 }: UiButtonProps) => {
   const [pending, setPending] = useState(isPending);
 
-  useMemo(() => {
+  useEffect(() => {
     setPending(isPending);
   }, [isPending]);
 

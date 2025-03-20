@@ -6,7 +6,16 @@ import UiIcon from "@/ui/Icon/Icon";
 
 const Back = () => {
   return (
-    <Box position="fixed" zIndex="2" padding="20px" paddingRight="28px">
+    <Box
+      position="absolute"
+      height="100%"
+      padding="0 20px"
+      alignItems="center"
+      display="flex"
+      right="100%"
+      zIndex="2"
+      paddingRight="28px"
+    >
       <Link to={routes.books}>
         <UiIcon icon={faArrowLeft} size="2xl" />
       </Link>

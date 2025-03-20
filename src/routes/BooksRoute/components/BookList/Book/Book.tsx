@@ -3,11 +3,12 @@ import { Book as ApiBook } from "@/types/api";
 import { Link } from "react-router";
 import routes from "@/config/routes";
 import getRouteUrl from "@/api/utils/getRouteUrl";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface BookProps {
   book: ApiBook;
+  index: number;
 }
 
 const getPageStyle = (pageIndex: number) => {
@@ -47,7 +48,7 @@ const getBg = (id: string) => {
   }
 };
 
-const Book: React.FC<BookProps> = ({ book }) => {
+const Book: React.FC<BookProps> = ({ book, index }) => {
   const [isRenaming, setIsRenaming] = useState(false);
   const [name, setName] = useState(book.name);
 
@@ -67,9 +68,15 @@ const Book: React.FC<BookProps> = ({ book }) => {
     setIsRenaming(false);
   };
 
+  const [opacity, setOpacity] = useState(0);
+
+  useEffect(() => {
+    setOpacity(1);
+  }, []);
+
   return (
     <Link to={getRouteUrl(routes.book, { bookId: book.id })}>
-      <Flex flexDirection="column">
+      <Flex flexDirection="column" opacity={opacity} transitionDelay={`${index * 0.1}s`} transition="opacity 0.3s">
         <Flex
           borderRadius="3px"
           padding="1px 2px 3px"

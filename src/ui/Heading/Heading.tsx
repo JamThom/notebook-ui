@@ -1,15 +1,10 @@
 import { Heading, HeadingProps } from "@chakra-ui/react";
 
-type UiHeadingProps = {
-  children: React.ReactNode;
-  mr: HeadingProps["mr"];
-}
+type UiHeadingProps = HeadingProps;
 
-const UiHeading = ({ children, mr }: UiHeadingProps) => {
+const UiHeading = (props: UiHeadingProps) => {
   return (
-    <Heading size="lg" mr={mr}>
-        {children}
-    </Heading>
+    <Heading  {...props} />
   )
 }
 

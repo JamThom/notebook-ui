@@ -37,7 +37,7 @@ const EditablePage = ({ page, connection }: EditablePageProps) => {
       <Textarea
         style={{
           width: "100%",
-          height: "80vh",
+          height: "calc(100vh - 110px)",
           border: 0,
           borderRadius: "0",
           backgroundColor: "white",

@@ -38,9 +38,10 @@ const HeaderWrap = ({
         style={{
           maxWidth: "900px",
           width: "80vw",
-          gap: "1",
+          position: "relative",
           justifyContent: "space-between",
         }}
+        gap="2"
       >
         {children}
       </Flex>

@@ -7,6 +7,7 @@ import routes from "./config/routes";
 import ApiProvider from "./api/ApiProvider";
 import UiProvider from "./ui/Provider/Provider";
 import { ModalOutput } from "./ui-hooks/useModalManager/useModalManager";
+import AccountMenu from "./components/AccountMenu/AccountMenu";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       <UiProvider>
         <ApiProvider>
           <ModalOutput />
+          <AccountMenu />
           <Routes>
             <Route path={routes.login} element={<LoginRoute />} />
             <Route path={routes.register} element={<RegisterRoute />} />

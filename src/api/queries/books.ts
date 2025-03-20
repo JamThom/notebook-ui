@@ -62,13 +62,9 @@ export const useUpdateBook = (id: string) => {
   }
 };
 
-export const useRenameBook = (id: string) => {
-  const updateBook = useUpdateBook(id);
-
-  return async (name: string) => {
-    const book = await updateBook({ name });
-    return book;
-  }
+export const useUpdateCurrentBook = () => {
+  const bookId = useParams<{ bookId: string }>().bookId as string;
+  return useUpdateBook(bookId);
 }
 
 export const useDeleteBook = () => {

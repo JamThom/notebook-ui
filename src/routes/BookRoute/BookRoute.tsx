@@ -8,6 +8,7 @@ import usePageConnection from "./usePageConnection";
 import UiHeading from "@/ui/Heading/Heading";
 import DeleteBook from "./components/DeleteBook/DeleteBook";
 import { Flex, Spinner } from "@chakra-ui/react";
+import EditableHeading from "./components/EditableHeading/EditableHeading";
 
 const BookRoute = () => {
   const book = useGetCurrentBook();
@@ -18,9 +19,7 @@ const BookRoute = () => {
       <BookWrapper>
         <HeaderWrap>
           <Back />
-          <UiHeading opacity={book ? 1 : 0} transition="opacity 0.3s" mr="auto">
-            {book?.name}
-          </UiHeading>
+          <EditableHeading />
           <DeleteBook />
           <AddPage />
         </HeaderWrap>

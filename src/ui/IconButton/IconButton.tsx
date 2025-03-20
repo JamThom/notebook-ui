@@ -2,12 +2,9 @@ import { Button, ButtonProps, Spinner } from "@chakra-ui/react";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { useState } from "react";
 import UiIcon from "../Icon/Icon";
+import { UiButtonProps } from "../Button/Button";
 
-type UiIconButtonProps = {
-  onClick?: () => void | Promise<void>;
-  icon: IconProp;
-  size?: ButtonProps["size"];
-};
+type UiIconButtonProps = Omit<UiButtonProps, "children">;
 
 const UiIconButton = ({ icon, onClick, size }: UiIconButtonProps) => {
   const [pending, setPending] = useState(false);

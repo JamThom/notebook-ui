@@ -6,11 +6,13 @@ import { useNavigate } from 'react-router';
 type UseQueryFnConfig = {
     method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
     successMessage?: string;
+    errorMessage?: string;
 }
 
 const useQueryFn = ({
     method,
     successMessage,
+    errorMessage,
 }: UseQueryFnConfig) => {
     const navigate = useNavigate();
     const { showSuccessToast, showErrorToast } = useToast();
@@ -29,7 +31,9 @@ const useQueryFn = ({
                     showSuccessToast(successMessage);
                 }
             } else {
-                showErrorToast(response.statusText);
+                if (method !== 'GET' || errorMessage) {
+                    showErrorToast(errorMessage ?? response.statusText);
+                }
             }
             if (response.status === 401) {
                 navigate(routes.login);

@@ -6,23 +6,28 @@ import RegisterRoute from "./routes/RegisterRoute/RegisterRoute";
 import routes from "./config/routes";
 import ApiProvider from "./api/ApiProvider";
 import UiProvider from "./ui/Provider/Provider";
+import { ModalOutput } from "./ui-hooks/useModalManager/useModalManager";
 
 const App = () => {
   return (
-    <UiProvider>
-      <ApiProvider>
-        <BrowserRouter>
+    <BrowserRouter>
+      <UiProvider>
+        <ApiProvider>
+          <ModalOutput />
           <Routes>
             <Route path={routes.login} element={<LoginRoute />} />
             <Route path={routes.register} element={<RegisterRoute />} />
             <Route path={routes.book} element={<BookRoute />} />
             <Route path={routes.books} element={<BooksRoute />} />
-            <Route path={routes.home} element={<Navigate to={routes.books} />} />
+            <Route
+              path={routes.home}
+              element={<Navigate to={routes.books} />}
+            />
             <Route path="*" element={<div>404 Not Found</div>} />
           </Routes>
-        </BrowserRouter>
-      </ApiProvider>
-    </UiProvider>
+        </ApiProvider>
+      </UiProvider>
+    </BrowserRouter>
   );
 };
 

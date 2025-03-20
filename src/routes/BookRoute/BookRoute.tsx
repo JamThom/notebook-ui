@@ -6,6 +6,7 @@ import HeaderWrap from "./components/HeaderWrap/HeaderWrap";
 import BookWrapper from "./components/BookWrapper/BookWrapper";
 import usePageConnection from "./usePageConnection";
 import UiHeading from "@/ui/Heading/Heading";
+import DeleteBook from "./components/DeleteBook/DeleteBook";
 
 const BookRoute = () => {
   const book = useGetCurrentBook();
@@ -20,7 +21,8 @@ const BookRoute = () => {
       <Back />
       <BookWrapper>
         <HeaderWrap>
-          <UiHeading>{book?.name}</UiHeading>
+          <UiHeading mr="auto">{book?.name}</UiHeading>
+          <DeleteBook />
           <AddPage />
         </HeaderWrap>
         {book?.pages.map((page) => (

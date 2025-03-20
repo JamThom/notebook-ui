@@ -19,6 +19,14 @@ export const useGetCurrentBook = () => {
   return useGetBook({ id: bookId });
 };
 
+export const useDeleteCurrentBook = () => {
+  const bookId = useParams<{ bookId: string }>().bookId as string;
+  const deleteBook = useDeleteBook();
+  return async () => {
+    await deleteBook(bookId);
+  }
+}
+
 export const useCreateBook = () => {
   const queryClient = useQueryClient();
   const postApi = useQueryFn({

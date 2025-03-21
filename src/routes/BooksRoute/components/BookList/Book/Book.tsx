@@ -76,12 +76,29 @@ const Book: React.FC<BookProps> = ({ book, index }) => {
 
   return (
     <Link to={getRouteUrl(routes.book, { bookId: book.id })}>
-      <Flex flexDirection="column" opacity={opacity} transitionDelay={`${index * 0.1}s`} transition="opacity 0.3s">
+      <Flex
+        role="group"
+        flexDirection="column"
+        opacity={opacity}
+        transitionDelay={`${index * 0.1}s`}
+        transition="0.3s"
+        _active={{
+          transform: "scale(0.9)",
+        }}
+      >
         <Flex
           borderRadius="3px"
+          transition="0.3s"
           padding="1px 2px 3px"
           background={getBg(book.id)}
           margin="0 auto 20px"
+          style={{
+            perspective: "1000px",
+          }}
+          _groupHover={{
+            transform: "scale(1.01)",
+            boxShadow: "0 10px 20px #00000021",
+          }}
         >
           {[0, 1].map((pageIndex) => {
             const pageLength = 450;
@@ -90,11 +107,25 @@ const Book: React.FC<BookProps> = ({ book, index }) => {
                 ? allTextContent.slice(0, pageLength)
                 : allTextContent.slice(pageLength);
             return (
-              <Stack gap="0" key={pageContent}>
+              <Stack
+                transition="0.3s"
+                _groupHover={{
+                  transform: `rotate3d(0, 1, 0, ${pageIndex === 0 ? "" : "-"}15deg)`,
+                  transformOrigin: `${pageIndex === 0 ? "right" : "left"} center`,
+                }}
+                gap="0"
+                key={pageContent}
+              >
                 <Box {...getPageStyle(pageIndex)}>
-                  <Text marginBottom="1" fontWeight="bold">{book.name}</Text>
-                  <Text height="83px" overflow="hidden">{pageContent}</Text>
-                  <Text marginTop="1" textAlign="center">{pageIndex + 1}</Text>
+                  <Text marginBottom="1" fontWeight="bold">
+                    {book.name}
+                  </Text>
+                  <Text height="83px" overflow="hidden">
+                    {pageContent}
+                  </Text>
+                  <Text marginTop="1" textAlign="center">
+                    {pageIndex + 1}
+                  </Text>
                 </Box>
                 <Box
                   {...getPageStyle(pageIndex)}

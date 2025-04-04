@@ -32,7 +32,9 @@ const useQueryFn = ({
                 }
             } else {
                 if (method !== 'GET' || errorMessage) {
-                    showErrorToast(errorMessage ?? response.statusText);
+                    console.log(response);
+                    const errorData = await response.json();
+                    showErrorToast(errorMessage ?? errorData?.message ?? response.statusText);
                 }
             }
             if (response.status === 401) {

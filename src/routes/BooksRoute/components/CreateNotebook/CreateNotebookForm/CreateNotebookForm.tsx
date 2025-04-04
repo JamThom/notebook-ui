@@ -35,6 +35,9 @@ const CreateNotebookForm = () => {
         name: data.notebookName,
     });
     setIsPending(false);
+    if (!id) {
+      return;
+    }
     closeModal();
     navigate(`/books/${id}`);
   };

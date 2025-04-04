@@ -3,7 +3,7 @@ const getBaseUrl = () => {
         return 'https://notebook-fzfcc8czg0buhgcf.germanywestcentral-01.azurewebsites.net';
     }
 
-    return 'http://localhost:5090';
+    return 'http://localhost:5000';
 };
 
 export default getBaseUrl;

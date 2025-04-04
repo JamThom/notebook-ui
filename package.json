@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "generate-api-types": "swagger-typescript-api -p http://localhost:5090/swagger/v1/swagger.json -o ./src/types/api -n generated.ts",
+    "generate-api-types": "swagger-typescript-api -p http://localhost:5000/swagger/v1/swagger.json -o ./src/types/api -n generated.ts",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

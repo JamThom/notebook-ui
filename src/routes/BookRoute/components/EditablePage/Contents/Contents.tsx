@@ -10,11 +10,7 @@ interface ContentsProps {
   beginSelect: () => void;
 }
 
-const Contents = ({
-  page,
-  connection,
-  beginSelect,
-}: ContentsProps) => {
+const Contents = ({ page, connection, beginSelect }: ContentsProps) => {
   const [editableBookContent, setEditableBookContent] = usePageContent(
     page,
     connection
@@ -35,7 +31,7 @@ const Contents = ({
 
   return (
     <Box
-      style={{
+      sx={{
         width: "100%",
         height: "calc(100vh - 110px)",
         border: 0,
@@ -44,20 +40,18 @@ const Contents = ({
         boxShadow: "rgb(0 0 0 / 6%) 0px 8px 25px 6px",
         overflowY: "auto",
         minHeight: "200px",
-    }}
-    padding="10"
-      _focus={{
-        outline: "none",
-      }}
-      sx={{
+        padding: "10px",
         h1: {
           fontSize: "2xl",
           fontWeight: "bold",
           display: "inline-block",
         },
         ul: {
-            paddingLeft: "1em",
+          paddingLeft: "1em",
         },
+      }}
+      _focus={{
+        outline: "none",
       }}
       ref={contentEditableRef}
       contentEditable

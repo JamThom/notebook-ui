@@ -7,24 +7,24 @@ type BookWrapperProps = {
 const BookWrapper = ({ children }: BookWrapperProps) => {
   return (
     <Box
-      style={{
+      sx={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: "40px",
-        padding: "30px",
+        gap: ["0", "40px"],
+        padding: ["0", "30px"],
         backgroundColor: "grey.400",
       }}
     >
       <Box
-        style={{
+        sx={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: "20px",
+          gap: ["0", "20px"],
           maxWidth: "900px",
-          width: "80vw",
-          paddingTop: "50px",
+          width: ["100vw", "80vw"],
+          paddingTop: ["0", "50px"],
         }}
       >
         {children}

@@ -14,7 +14,7 @@ const AccountMenu: React.FC = () => {
   };
 
   return (
-    <Flex position="fixed" right={4} top={4} zIndex={2}>
+    <Flex position="fixed" display={["none", "unset"]} right={4} top={4} zIndex={2}>
       <Menu>
         <MenuButton
           as={Button}

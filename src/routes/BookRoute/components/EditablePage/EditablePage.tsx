@@ -29,9 +29,10 @@ const EditablePage = ({ page, connection }: EditablePageProps) => {
 
   return (
     <Box
-      style={{
+      sx={{
         width: "100%",
         position: "relative",
+        padding: ["10px", "0"],
       }}
     >
       {selectedCoords && (
@@ -43,7 +44,7 @@ const EditablePage = ({ page, connection }: EditablePageProps) => {
       )}
       <Contents page={page} connection={connection} isSelection={!!selectedCoords} beginSelect={beginSelect} />
       <Flex
-        style={{
+        sx={{
           position: "absolute",
           right: "20px",
           bottom: "20px",

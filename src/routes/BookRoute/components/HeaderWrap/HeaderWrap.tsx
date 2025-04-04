@@ -10,9 +10,9 @@ const HeaderWrap = ({
 
   return (
     <Flex
-      style={{
+      sx={{
         width: "100vw",
-        position: "fixed",
+        position: ["static", "fixed"],
         zIndex: 1,
         top: "0",
         left: "0",
@@ -24,10 +24,11 @@ const HeaderWrap = ({
       }}
     >
       <Box
-        style={{
+        sx={{
           height: "100px",
           background: "#ff000000",
           position: "absolute",
+          display: ["none", "block"],
           top: "100%",
           width: "80vw",
           maxWidth: "900px",
@@ -35,11 +36,12 @@ const HeaderWrap = ({
         }}
       />
       <Flex
-        style={{
+        sx={{
           maxWidth: "900px",
-          width: "80vw",
+          width: ["100vw", "80vw"],
           position: "relative",
           justifyContent: "space-between",
+          flexWrap: ["wrap", "nowrap"],
         }}
         gap="2"
       >

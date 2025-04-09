@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import { Book } from "@/types/api";
 import usePageContent from "./usePageContent";
 import { useEffect, useRef } from "react";
+import styles from "./Contents.styles";
 
 interface ContentsProps {
   page: Book["pages"][0];
@@ -9,6 +10,33 @@ interface ContentsProps {
   isSelection: boolean;
   beginSelect: () => void;
 }
+
+const removeLinksFromHTML = (html: string) => {
+  const regex = /<a[^>]*>(.*?)<\/a>/g;
+  return html.replace(regex, "$1");
+};
+
+const getUrlsFromString = (str: string) => {
+  const regex = /https?:\/\/[^\s<\n]+/g;
+  const urls = str.match(regex);
+  return urls;
+};
+
+const formatHTMLWithTags = (html: string) => {
+  let a = removeLinksFromHTML(html);
+  const urls = getUrlsFromString(a);
+  console.log(urls);
+
+  if (urls) {
+    urls.forEach((url) => {
+      a = a.split(url).join(`<a href="${url}" target="_blank">${url}</a>`);
+    });
+  } else {
+    return html;
+  }
+
+  return a;
+};
 
 const Contents = ({ page, connection, beginSelect }: ContentsProps) => {
   const [editableBookContent, setEditableBookContent] = usePageContent(
@@ -25,33 +53,43 @@ const Contents = ({ page, connection, beginSelect }: ContentsProps) => {
   }, []);
 
   const handleContentEditableInput = () => {
-    const content = contentEditableRef.current?.innerHTML ?? "";
-    setEditableBookContent(content);
+    const contentEditable = contentEditableRef.current;
+    if (!contentEditable) return;
+
+    // Save the caret position
+    const selection = window.getSelection();
+    const range = selection?.getRangeAt(0);
+    const caretOffset = range ? range.startOffset : null;
+
+    const content = contentEditable.innerHTML ?? "";
+    const formattedContent = formatHTMLWithTags(content);
+
+    if (formattedContent !== content) {
+      contentEditable.innerHTML = formattedContent;
+
+      // Restore the caret position
+      if (caretOffset !== null && selection) {
+        const newRange = document.createRange();
+        newRange.setStart(contentEditable.firstChild || contentEditable, caretOffset);
+        newRange.collapse(true);
+        selection.removeAllRanges();
+        selection.addRange(newRange);
+      }
+    }
+
+    setEditableBookContent(formattedContent);
   };
 
   return (
     <Box
-      sx={{
-        width: "100%",
-        height: "calc(100vh - 110px)",
-        border: 0,
-        borderRadius: "0",
-        backgroundColor: "white",
-        boxShadow: "rgb(0 0 0 / 6%) 0px 8px 25px 6px",
-        overflowY: "auto",
-        minHeight: "200px",
-        padding: "10px",
-        h1: {
-          fontSize: "2xl",
-          fontWeight: "bold",
-          display: "inline-block",
-        },
-        ul: {
-          paddingLeft: "1em",
-        },
-      }}
-      _focus={{
-        outline: "none",
+      sx={styles.container}
+      _focus={styles.focus}
+      onClick={(e) => {
+        if ((e.target as HTMLElement).tagName === "A") {
+          const url = (e.target as HTMLElement).getAttribute("href");
+          if (!url) return;
+          window.open(url, "_blank");
+        }
       }}
       ref={contentEditableRef}
       contentEditable

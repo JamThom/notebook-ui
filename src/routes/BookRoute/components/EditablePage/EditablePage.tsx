@@ -6,6 +6,7 @@ import { useGetCurrentBook } from "@/api";
 import useSelectionState from "./useSelectionState";
 import Toolbar from "./Toolbar/Toolbar";
 import Contents from "./Contents/Contents";
+import styles from "./EditablePage.styles";
 
 interface EditablePageProps {
   page: Book["pages"][0];
@@ -13,7 +14,6 @@ interface EditablePageProps {
 }
 
 const EditablePage = ({ page, connection }: EditablePageProps) => {
-
   const book = useGetCurrentBook();
 
   const deletePage = useDeletePage();
@@ -28,13 +28,7 @@ const EditablePage = ({ page, connection }: EditablePageProps) => {
   const { unSelect, beginSelect, replaceSelection, selectedCoords } = useSelectionState();
 
   return (
-    <Box
-      sx={{
-        width: "100%",
-        position: "relative",
-        padding: ["10px", "0"],
-      }}
-    >
+    <Box sx={styles.container}>
       {selectedCoords && (
         <Toolbar
           unSelect={unSelect}
@@ -43,14 +37,7 @@ const EditablePage = ({ page, connection }: EditablePageProps) => {
         />
       )}
       <Contents page={page} connection={connection} isSelection={!!selectedCoords} beginSelect={beginSelect} />
-      <Flex
-        sx={{
-          position: "absolute",
-          right: "20px",
-          bottom: "20px",
-        }}
-        mt={4}
-      >
+      <Flex sx={styles.toolbar} mt={4}>
         {book && book.pages.length > 1 && (
           <UiRemoveButton onRemove={removePage} />
         )}

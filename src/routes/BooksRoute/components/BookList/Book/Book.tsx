@@ -5,6 +5,12 @@ import routes from "@/config/routes";
 import getRouteUrl from "@/utils/getRouteUrl/getRouteUrl";
 import { useEffect, useMemo, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styles from "./Book.styles";
+
+const removeHTMLAttributes = (html: string) => {
+  const regex = /[A-Za-z0-9]+="[^"]*"/g;
+  return html.replace(regex, "");
+};
 
 interface BookProps {
   book: ApiBook;
@@ -53,7 +59,7 @@ const Book: React.FC<BookProps> = ({ book, index }) => {
   const [name, setName] = useState(book.name);
 
   const allTextContent = useMemo(() => {
-    return book.pages.map((page) => page.content).join(" ");
+    return removeHTMLAttributes(book.pages.map((page) => page.content).join(" "));
   }, [book.pages]);
 
   const handleStartRenaming: React.MouseEventHandler<HTMLHeadingElement> = (
@@ -78,27 +84,13 @@ const Book: React.FC<BookProps> = ({ book, index }) => {
     <Link to={getRouteUrl(routes.book, { bookId: book.id })}>
       <Flex
         role="group"
-        flexDirection="column"
+        sx={styles.container}
         opacity={opacity}
         transitionDelay={`${index * 0.1}s`}
-        transition="0.3s"
-        _active={{
-          transform: "scale(0.9)",
-        }}
       >
         <Flex
-          borderRadius="3px"
-          transition="0.3s"
-          padding="1px 2px 3px"
+          sx={styles.bookCover}
           background={getBg(book.id)}
-          margin="0 auto 20px"
-          style={{
-            perspective: "1000px",
-          }}
-          _groupHover={{
-            transform: "scale(1.01)",
-            boxShadow: "0 10px 20px #00000021",
-          }}
         >
           {[0, 1].map((pageIndex) => {
             const pageLength = 450;
@@ -108,21 +100,25 @@ const Book: React.FC<BookProps> = ({ book, index }) => {
                 : allTextContent.slice(pageLength);
             return (
               <Stack
-                transition="0.3s"
+                sx={styles.page}
                 _groupHover={{
-                  transform: `rotate3d(0, 1, 0, ${pageIndex === 0 ? "" : "-"}15deg)`,
-                  transformOrigin: `${pageIndex === 0 ? "right" : "left"} center`,
+                  transform: `rotate3d(0, 1, 0, ${
+                    pageIndex === 0 ? "" : "-"
+                  }15deg)`,
+                  transformOrigin: `${
+                    pageIndex === 0 ? "right" : "left"
+                  } center`,
                 }}
-                gap="0"
                 key={pageContent}
               >
                 <Box {...getPageStyle(pageIndex)}>
                   <Text marginBottom="1" fontWeight="bold">
                     {book.name}
                   </Text>
-                  <Text height="83px" overflow="hidden">
-                    {pageContent}
-                  </Text>
+                  <Box
+                    sx={styles.pageContent}
+                    dangerouslySetInnerHTML={{ __html: pageContent }}
+                  />
                   <Text marginTop="1" textAlign="center">
                     {pageIndex + 1}
                   </Text>
@@ -146,7 +142,7 @@ const Book: React.FC<BookProps> = ({ book, index }) => {
         {isRenaming ? (
           <Flex>
             <Input
-              type="text"
+              sx={styles.renamingInput}
               value={name}
               onChange={(e) => setName(e.target.value)}
               onBlur={handleRename}

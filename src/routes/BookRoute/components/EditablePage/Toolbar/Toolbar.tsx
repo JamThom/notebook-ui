@@ -2,6 +2,7 @@ import { useOutsideClick } from "@chakra-ui/react";
 import { Flex } from "@chakra-ui/react";
 import { useRef } from "react";
 import UiIconButton from "@/ui/IconButton/IconButton";
+import styles from "./Toolbar.styles";
 
 interface ToolbarProps {
   selectedCoords: { top: number; left: number } | null;
@@ -14,7 +15,6 @@ const Toolbar = ({
   unSelect,
   replaceSelection,
 }: ToolbarProps) => {
-
   const tooltip = useRef<HTMLDivElement>(null);
 
   useOutsideClick({
@@ -64,41 +64,11 @@ const Toolbar = ({
   return (
     <Flex
       ref={tooltip}
-      style={{
-        position: "fixed",
-        zIndex: 1000,
-        top: selectedCoords?.top,
-        left: selectedCoords?.left,
-        padding: "10px",
-        backgroundColor: "white",
-        border: "1px solid #ccc",
-        borderRadius: "4px",
-        cursor: "pointer",
-        transform: "translate(-50%, -100%)",
-        marginTop: "-10px",
-        boxShadow: "0 0 10px #00000021",
-      }}
-      _before={{
-        content: '""',
-        position: "absolute",
-        top: "100%",
-        left: "50%",
-        borderLeft: "10px solid transparent",
-        borderRight: "10px solid transparent",
-        borderTop: "10px solid white",
-        transform: "translate(-50%, 0)",
-        zIndex: 1,
-      }}
-      _after={{
-        content: '""',
-        position: "absolute",
-        top: "100%",
-        left: "50%",
-        borderLeft: "10px solid transparent",
-        borderRight: "10px solid transparent",
-        borderTop: "10px solid #ccc",
-        transform: "translate(-50%, 1px)",
-      }}
+      sx={styles.container}
+      top={selectedCoords?.top}
+      left={selectedCoords?.left}
+      _before={styles.before}
+      _after={styles.after}
     >
       <UiIconButton icon="list" onClick={formatSelectionAsList} />
       <UiIconButton icon="bold" onClick={formatSelectionAsBold} />
@@ -107,7 +77,6 @@ const Toolbar = ({
       <UiIconButton icon="heading" onClick={formatSelectionAsHeading} />
     </Flex>
   );
-
 };
 
 export default Toolbar;

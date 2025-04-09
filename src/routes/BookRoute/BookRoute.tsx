@@ -8,6 +8,7 @@ import usePageConnection from "./usePageConnection";
 import DeleteBook from "./components/DeleteBook/DeleteBook";
 import { Flex } from "@chakra-ui/react";
 import EditableHeading from "./components/EditableHeading/EditableHeading";
+import styles from "./BookRoute.styles";
 
 const BookRoute = () => {
   const book = useGetCurrentBook();
@@ -27,21 +28,7 @@ const BookRoute = () => {
             <EditablePage key={page.id} page={page} connection={connection} />
           ))
         ) : (
-          <Flex
-            style={{
-              width: "100%",
-              position: "relative",
-              height: "80vh",
-              border: 0,
-              justifyContent: "center",
-              alignItems: "center",
-              borderRadius: "0",
-              backgroundColor: "white",
-              boxShadow: "rgb(0 0 0 / 6%) 0px 8px 25px 6px",
-              overflowY: "auto",
-              padding: "10px",
-            }}
-          />
+          <Flex sx={styles.container} />
         )}
       </BookWrapper>
     </>

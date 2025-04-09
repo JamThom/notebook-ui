@@ -7,11 +7,11 @@ import { useParams } from "react-router";
 export const BOOKS_KEY = 'books';
 
 export const useGetBooks = () => {
-  return useGetQuery<BooksResponse>([BOOKS_KEY], 'books').data?.items;
+  return useGetQuery<BooksResponse>([BOOKS_KEY], 'books').data;
 };
 
 export const useGetBook = ({ id }: { id: string }) => {
-  return useGetQuery<BookResponse>([id], `books/${id}`).data?.item;
+  return useGetQuery<BookResponse>([id], `books/${id}`).data;
 };
 
 export const useGetCurrentBook = () => {

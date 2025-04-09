@@ -52,8 +52,6 @@ export interface RegisterRequest {
 export interface UpdateAccountRequest {
   userName?: string;
   email?: string;
-  newPassword?: string;
-  confirmPassword?: string;
 }
 
 export interface UpdateBookRequest {

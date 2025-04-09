@@ -6,7 +6,7 @@ import { useQueryClient } from "@tanstack/react-query";
 const PAGES_KEY = 'pages';
 
 export const useGetPage = ({ id }: { id: string }) => {
-  return useGetQuery<PageResponse>([PAGES_KEY, id], `pages/${id}`).data?.item; 
+  return useGetQuery<PageResponse>([PAGES_KEY, id], `pages/${id}`).data; 
 };
 
 export const useDeletePage = () => {
